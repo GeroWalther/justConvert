@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
 import { currencies } from '../constants';
 import { useCurrConvert } from '../hooks/useCurrConvert';
 
 const ConvertComp = () => {
+  const [text, setText] = useState('1');
   const [amount, setAmount] = useState(1);
   const [fromCur, setFromCur] = useState('EUR');
   const [toCur, setToCur] = useState('USD');
@@ -16,58 +17,73 @@ const ConvertComp = () => {
     toCur
   );
 
+  function convertHandler() {
+    setAmount(Number(text));
+  }
+
   return (
     <>
       <Text className='text-slate-50 font-semibold text-center text-lg p-4 mb-5'>
         {!error ? 'justConverter' : 'Error converting !!'}
       </Text>
-      <View className='justify-center flex-row items-center'>
+      <View className='justify-center flex-row items-center gap-3'>
         <TextInput
           className='pt-3 pb-5 px-2 text-center text-slate-800 bg-[#f0f0f0] font-semibold text-lg rounded-lg w-[50%]'
           keyboardType='numeric'
-          value={amount.toString()}
-          onChangeText={(text) => setAmount(Number(text))}
+          value={text}
+          onChangeText={(tx) => setText(tx)}
           editable={!isLoading}
         />
-        <View className='flex-row mx-2'>
-          <View className='mx-2'>
-            <RNPickerSelect
-              value={fromCur}
-              onValueChange={(value) => {
-                if (value !== '' && value !== toCur) {
-                  setFromCur(value);
-                } else {
-                  return;
-                }
-              }}
-              style={pickerSelectStyles}
-              placeholder={{
-                label: 'select',
-                value: '',
-                color: '#9EA0A4',
-                disabled: true,
-              }}
-              items={currencies}
-            />
+        <View className='items-center'>
+          <View className='flex-row mx-2 my-2 gap-2 '>
+            <View>
+              <RNPickerSelect
+                value={fromCur}
+                onValueChange={(value) => {
+                  if (value !== '' && value !== toCur) {
+                    setFromCur(value);
+                  } else {
+                    return;
+                  }
+                }}
+                style={pickerSelectStyles}
+                placeholder={{
+                  label: 'select',
+                  value: '',
+                  color: '#9EA0A4',
+                  disabled: true,
+                }}
+                items={currencies}
+              />
+            </View>
+            <View>
+              <RNPickerSelect
+                value={toCur}
+                onValueChange={(value) => {
+                  if (value !== '' && value !== fromCur) {
+                    setToCur(value);
+                  } else {
+                    return;
+                  }
+                }}
+                style={pickerSelectStyles}
+                placeholder={{
+                  label: 'select',
+                  value: '',
+                  color: '#9EA0A4',
+                  disabled: true,
+                }}
+                items={currencies}
+              />
+            </View>
           </View>
-          <RNPickerSelect
-            value={toCur}
-            onValueChange={(value) => {
-              if (value !== '' && value !== fromCur) {
-                setToCur(value);
-              } else {
-                return;
-              }
-            }}
-            style={pickerSelectStyles}
-            placeholder={{
-              label: 'select',
-              value: '',
-              color: '#9EA0A4',
-              disabled: true,
-            }}
-            items={currencies}
-          />
+          <Pressable
+            className='bg-lime-600 rounded-full w-[80%] py-2'
+            onPress={convertHandler}>
+            <Text className='text-slate-50 text-center font-semibold text-lg '>
+              Convert
+            </Text>
+          </Pressable>
         </View>
       </View>
       <View className='flex items-center justify-center mt-8 bg-slate-900 py-4'>
