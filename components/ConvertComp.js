@@ -29,7 +29,7 @@ const ConvertComp = () => {
       <View className='justify-center flex-row items-center gap-3'>
         <TextInput
           className='pt-3 pb-5 px-2 text-center text-slate-800 bg-[#f0f0f0] font-semibold text-lg rounded-lg w-[50%]'
-          keyboardType='numeric'
+          keyboardType='number-pad'
           value={text}
           onChangeText={(tx) => setText(tx)}
           editable={!isLoading}
@@ -78,7 +78,7 @@ const ConvertComp = () => {
             </View>
           </View>
           <Pressable
-            className='bg-lime-600 rounded-full w-[80%] py-2'
+            className='bg-lime-600 rounded-[15px] w-[80%] py-2'
             onPress={convertHandler}>
             <Text className='text-slate-50 text-center font-semibold text-lg '>
               Convert
