@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  Keyboard,
+} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
 import { currencies } from '../constants';
@@ -19,6 +26,7 @@ const ConvertComp = () => {
 
   function convertHandler() {
     setAmount(Number(text));
+    Keyboard.dismiss();
   }
 
   return (
