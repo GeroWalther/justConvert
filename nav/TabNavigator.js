@@ -21,16 +21,12 @@ export default function TabNavigator() {
         tabBarActiveTintColor: '#16a34a',
         tabBarInactiveTintColor: '#94a3b8',
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
           if (route.name === 'Currency') {
-            iconName = focused ? 'attach-money' : 'attach-money';
+            return (
+              <MaterialIcons name='attach-money' size={35} color={color} />
+            );
           } else if (route.name === 'Unit') {
-            iconName = focused ? 'ruler' : 'ruler';
-          }
-          if (route.name === 'Currency') {
-            return <MaterialIcons name={iconName} size={35} color={color} />;
-          } else if (route.name === 'Unit') {
-            return <Entypo name={iconName} size={30} color={color} />;
+            return <Entypo name='ruler' size={30} color={color} />;
           }
         },
       })}>
