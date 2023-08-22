@@ -30,9 +30,9 @@ const ConvertComp = () => {
   }
 
   return (
-    <>
+    <View className='bg-slate-600 flex-1'>
       <Text className='text-slate-50 font-semibold text-center text-lg p-4 mb-5'>
-        {!error ? 'justConverter' : 'Error converting !!'}
+        {!error ? 'justConvert logo' : 'Error converting !!'}
       </Text>
       <View className='justify-center flex-row items-center gap-3'>
         <TextInput
@@ -99,7 +99,7 @@ const ConvertComp = () => {
           {isLoading ? 'Converting...' : `${convertedCur} ${toCur}`}
         </Text>
       </View>
-    </>
+    </View>
   );
 };
 

@@ -1,7 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
-import ConvertComp from './components/ConvertComp';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigator from './nav/TabNavigator';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,11 +14,13 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaView className='bg-slate-600 flex-1'>
-        <ConvertComp />
-        <StatusBar style='light' />
-      </SafeAreaView>
-    </QueryClientProvider>
+    <NavigationContainer>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaView className='bg-slate-600 flex-1'>
+          <TabNavigator />
+          <StatusBar style='light' />
+        </SafeAreaView>
+      </QueryClientProvider>
+    </NavigationContainer>
   );
 }
