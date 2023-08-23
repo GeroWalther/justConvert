@@ -1,44 +1,34 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet, Keyboard, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-
-import { currencies } from '../constants';
-import { useCurrConvert } from '../hooks/useCurrConvert';
+import { weights } from '../constants';
 import GreenBtn from './Btn/GreenBtn';
 import Input from './Inputs/Input';
 
-const ConvertComp = () => {
-  const [text, setText] = useState('1');
-  const [amount, setAmount] = useState(1);
-  const [fromCur, setFromCur] = useState('EUR');
-  const [toCur, setToCur] = useState('USD');
+const UnitConvert = () => {
+  // const [gr, setGr] = useState('0');
+  // const convertedGrToLbs = (gr * 0.00220462).toFixed(2);
+  // const convertedKgToLbs = (kg * 2.20462).toFixed(2);
 
-  const { isLoading, error, convertedCur } = useCurrConvert(
-    amount,
-    fromCur,
-    toCur
-  );
+  const [fromVal, setFromVal] = useState('gr');
+  const [toVal, setToVal] = useState('lb');
+  const [input, setInput] = useState('0');
 
   function convertHandler() {
-    setAmount(Number(text));
     Keyboard.dismiss();
   }
 
   return (
     <ScrollView className='flex-1 gap-10'>
       <View className='flex-row justify-around items-center px-4'>
-        <Input
-          text={text}
-          setText={(tx) => setText(tx)}
-          editable={!isLoading}
-        />
+        <Input text={input} setText={(tx) => setInput(tx)} />
         <View className='gap-3 w-[45%]'>
           <View>
             <RNPickerSelect
-              value={fromCur}
+              value={fromVal}
               onValueChange={(value) => {
-                if (value !== '' && value !== toCur) {
-                  setFromCur(value);
+                if (value !== '' && value !== toVal) {
+                  setFromVal(value);
                 } else {
                   return;
                 }
@@ -50,15 +40,15 @@ const ConvertComp = () => {
                 color: '#9EA0A4',
                 disabled: true,
               }}
-              items={currencies}
+              items={weights}
             />
           </View>
           <View>
             <RNPickerSelect
-              value={toCur}
+              value={toVal}
               onValueChange={(value) => {
-                if (value !== '' && value !== fromCur) {
-                  setToCur(value);
+                if (value !== '' && value !== fromVal) {
+                  setToVal(value);
                 } else {
                   return;
                 }
@@ -70,7 +60,7 @@ const ConvertComp = () => {
                 color: '#9EA0A4',
                 disabled: true,
               }}
-              items={currencies}
+              items={weights}
             />
           </View>
         </View>
@@ -78,23 +68,22 @@ const ConvertComp = () => {
       <View className='items-center mt-8'>
         <GreenBtn onPress={convertHandler} />
       </View>
-      <View className='flex items-center justify-center mt-8 bg-slate-900 py-4'>
+      <View className='flex items-center justify-center bg-slate-900 py-4'>
         <Text className='text-slate-50 text-center font-bold text-xl'>
-          {isLoading ? 'Converting...' : `${convertedCur} ${toCur}`}
-          {error && 'Error converting !!'}
+          {/* {converted}  */}
+          lbs
         </Text>
       </View>
     </ScrollView>
   );
 };
 
-export default ConvertComp;
+export default UnitConvert;
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     color: '#2c2c2c',
     backgroundColor: '#f0f0f0',
-
     paddingVertical: 5,
     paddingHorizontal: 20,
     borderRadius: 15,
@@ -107,7 +96,6 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     color: '#2c2c2c',
     backgroundColor: '#e2e2e2',
-
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 15,
