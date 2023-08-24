@@ -3,7 +3,7 @@ export function reducer(state, action) {
     case 'kgToLb':
       return { ...state, converted: (action.payload * 2.20462).toFixed(2) };
     case 'grToLb':
-      return { ...state, converted: (action.payload / 453.59237).toFixed(2) };
+      return { ...state, converted: (action.payload / 453.59237).toFixed(4) };
     case 'lbToKg':
       return { ...state, converted: (action.payload * 0.453592).toFixed(6) };
     case 'grToKg':

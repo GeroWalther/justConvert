@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Keyboard } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { weights } from '../constants';
@@ -16,7 +16,11 @@ const UnitConvert = () => {
   // const convertedGrToLbs = (gr * 0.00220462).toFixed(2);
   const [fromVal, setFromVal] = useState('kg');
   const [toVal, setToVal] = useState('lb');
-  const [input, setInput] = useState('0');
+  const [input, setInput] = useState('1');
+
+  useEffect(() => {
+    convertHandler();
+  }, [toVal, fromVal]);
 
   function convertHandler() {
     if (fromVal === 'kg' && toVal === 'lb') {
