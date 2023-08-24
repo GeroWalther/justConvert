@@ -32,7 +32,7 @@ const ConvertComp = () => {
           setText={(tx) => setText(tx)}
           editable={!isLoading}
         />
-        <View className='gap-3 w-[45%]'>
+        <View className='gap-3 w-[35%]'>
           <View>
             <RNPickerSelect
               value={fromCur}
