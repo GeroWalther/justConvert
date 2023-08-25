@@ -1,10 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, Keyboard } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import { Keyboard, Text } from 'react-native';
 import { weights } from '../constants';
 import { reducer } from '../services/lib/reducer';
-import GreenBtn from './Btn/GreenBtn';
-import Input from './Inputs/Input';
+import ConvertLayout from './ui/ConvertLayout';
 
 const initialState = {
   converted: 0,
@@ -12,15 +10,13 @@ const initialState = {
 
 const UnitConvert = () => {
   const [{ converted }, dispatch] = useReducer(reducer, initialState);
-
-  // const convertedGrToLbs = (gr * 0.00220462).toFixed(2);
   const [fromVal, setFromVal] = useState('kg');
   const [toVal, setToVal] = useState('lb');
   const [input, setInput] = useState('1');
 
   useEffect(() => {
     convertHandler();
-  }, [toVal, fromVal]);
+  }, [toVal, fromVal, input]);
 
   function convertHandler() {
     if (fromVal === 'kg' && toVal === 'lb') {
@@ -76,6 +72,8 @@ const UnitConvert = () => {
       dispatch({ type: 'ozToGr', payload: Number(input) });
     } else if (fromVal === 'mg' && toVal === 'µg') {
       dispatch({ type: 'mgToµg', payload: Number(input) });
+    } else if (fromVal === 'mg' && toVal === 'lb') {
+      dispatch({ type: 'mgToLb', payload: Number(input) });
     } else if (fromVal === 'µg' && toVal === 'mg') {
       dispatch({ type: 'µgToMg', payload: Number(input) });
     } else if (fromVal === 'gr' && toVal === 'mg') {
@@ -86,6 +84,8 @@ const UnitConvert = () => {
       dispatch({ type: 'cupflToGr', payload: Number(input) });
     } else if (fromVal === 'cup-us-sugar' && toVal === 'gr') {
       dispatch({ type: 'cupSugarToGr', payload: Number(input) });
+    } else if (fromVal === 'cup-us-sugar' && toVal === 'lb') {
+      dispatch({ type: 'cupSugarToLb', payload: Number(input) });
     } else if (fromVal === 'cup-us-rice' && toVal === 'gr') {
       dispatch({ type: 'cupRiceToGr', payload: Number(input) });
     } else if (fromVal === 'cup-us-oats' && toVal === 'gr') {
@@ -154,6 +154,12 @@ const UnitConvert = () => {
     Keyboard.dismiss();
   }
 
+  function switchHandler() {
+    const temp = fromVal;
+    setFromVal(toVal);
+    setToVal(temp);
+  }
+
   const filteredAvailable = weights.filter((option) => {
     if (fromVal.includes('cup')) {
       return !option.value.includes('cup');
@@ -163,89 +169,23 @@ const UnitConvert = () => {
   });
 
   return (
-    <ScrollView className='flex-1 gap-10'>
-      <View className='flex-row justify-around items-center px-4'>
-        <Input text={input} setText={(tx) => setInput(tx)} />
-        <View className='gap-3 w-[45%]'>
-          <View>
-            <RNPickerSelect
-              value={fromVal}
-              onValueChange={(value) => {
-                if (value !== '' && value !== toVal) {
-                  setFromVal(value);
-                } else {
-                  return;
-                }
-              }}
-              style={pickerSelectStyles}
-              placeholder={{
-                label: 'select',
-                value: '',
-                color: '#9EA0A4',
-                disabled: true,
-              }}
-              items={weights}
-            />
-          </View>
-          <View>
-            <RNPickerSelect
-              value={toVal}
-              onValueChange={(value) => {
-                if (value !== '' && value !== fromVal) {
-                  setToVal(value);
-                } else {
-                  return;
-                }
-              }}
-              style={pickerSelectStyles}
-              placeholder={{
-                label: 'select',
-                value: '',
-                color: '#9EA0A4',
-                disabled: true,
-              }}
-              items={filteredAvailable}
-            />
-          </View>
-        </View>
-      </View>
-      <View className='items-center mt-8'>
-        <GreenBtn onPress={convertHandler} />
-      </View>
-      <View className='flex items-center justify-center bg-slate-900 py-4'>
-        <Text className='text-slate-50 text-center font-bold text-xl'>
-          {converted} {toVal}
-        </Text>
-      </View>
-    </ScrollView>
+    <>
+      <ConvertLayout
+        converted={converted}
+        input={input}
+        convertHandler={convertHandler}
+        fromVal={fromVal}
+        toVal={toVal}
+        setToVal={setToVal}
+        setFromVal={setFromVal}
+        setInput={setInput}
+        items1={weights}
+        items2={filteredAvailable}
+        switchHandler={switchHandler}
+      />
+      <Text className='text-orange-400 mb-11'>Henlo!!!!!!</Text>
+    </>
   );
 };
 
 export default UnitConvert;
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    color: '#2c2c2c',
-    backgroundColor: '#f0f0f0',
-    paddingVertical: 5,
-    paddingHorizontal: 20,
-    borderRadius: 15,
-    height: 44,
-    width: '100%',
-    fontWeight: 'bold',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputAndroid: {
-    color: '#2c2c2c',
-    backgroundColor: '#e2e2e2',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 15,
-    height: 34,
-    width: '30%',
-    fontWeight: 'bold',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

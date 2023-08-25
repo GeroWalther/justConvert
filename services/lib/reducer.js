@@ -12,6 +12,8 @@ export function reducer(state, action) {
       return { ...state, converted: action.payload * 1000 };
     case 'mgToKg':
       return { ...state, converted: (action.payload * 0.000001).toFixed(6) };
+    case 'mgToLb':
+      return { ...state, converted: (action.payload / 453592.37).toFixed(8) };
     case 'kgToMg':
       return { ...state, converted: action.payload * 1000000 };
     case 'µgToKg':
