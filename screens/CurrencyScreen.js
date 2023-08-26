@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ConvertComp from '../components/ConvertComp';
+import CurrConvert from '../components/CurrConvert';
 
 const CurrencyScreen = () => {
   return (
@@ -8,7 +8,7 @@ const CurrencyScreen = () => {
       <Text className='text-slate-50 font-semibold text-center text-lg p-4 mb-5'>
         justConvert logo
       </Text>
-      <ConvertComp />
+      <CurrConvert />
     </View>
   );
 };

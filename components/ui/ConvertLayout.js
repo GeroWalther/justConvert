@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import RNPickerSelect from 'react-native-picker-select';
 import GreenBtn from '../Btn/GreenBtn';
@@ -22,7 +22,7 @@ const ConvertLayout = ({
   error = null,
 }) => {
   return (
-    <ScrollView className='flex-1 gap-10'>
+    <View className='flex-1 gap-8'>
       <View className='flex-row justify-around items-center px-4'>
         <Input text={input} setText={(tx) => setInput(tx)} />
         <View className='gap-3 items-center'>
@@ -80,7 +80,7 @@ const ConvertLayout = ({
           {error && 'Error converting !!'}
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

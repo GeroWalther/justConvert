@@ -1,8 +1,10 @@
 import React, { useState, useReducer, useEffect } from 'react';
-import { Keyboard, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Keyboard, Alert } from 'react-native';
 import { weights } from '../constants';
 import { reducer } from '../services/lib/reducer';
 import ConvertLayout from './ui/ConvertLayout';
+import HistoryLayout from './ui/HistoryLayout';
 
 const initialState = {
   converted: 0,
@@ -14,15 +16,60 @@ const UnitConvert = () => {
   const [toVal, setToVal] = useState('lb');
   const [input, setInput] = useState('1');
 
+  const [items, setItems] = useState([]);
+
   useEffect(() => {
     convertHandler();
+    setItems(() => [
+      ...items,
+      {
+        input,
+        fromVal,
+        toVal,
+        converted,
+        id: Date.now(),
+      },
+    ]);
   }, [toVal, fromVal, input]);
+
+  useEffect(() => {
+    loadState();
+  }, []);
+
+  useEffect(() => {
+    if (items !== []) saveState();
+  }, [items]);
+
+  const loadState = async () => {
+    try {
+      // Load the saved state from local storage
+      const savedState = await AsyncStorage.getItem('appStateUnit');
+      if (savedState !== null) {
+        const { items: savedItems } = JSON.parse(savedState);
+        setItems(savedItems);
+      }
+    } catch (error) {
+      console.log('Error loading state from local storage:', error);
+    }
+  };
+  const saveState = async () => {
+    try {
+      const appState = JSON.stringify({ items });
+      await AsyncStorage.setItem('appStateUnit', appState);
+    } catch (error) {
+      console.log('Error saving state to local storage:', error);
+    }
+  };
 
   function convertHandler() {
     if (fromVal === 'kg' && toVal === 'lb') {
       dispatch({ type: 'kgToLb', payload: Number(input) });
     } else if (fromVal === 'lb' && toVal === 'kg') {
       dispatch({ type: 'lbToKg', payload: Number(input) });
+    } else if (fromVal === 'oz' && toVal === 'kg') {
+      dispatch({ type: 'ozToKg', payload: Number(input) });
+    } else if (fromVal === 'kg' && toVal === 'oz') {
+      dispatch({ type: 'kgToOz', payload: Number(input) });
     } else if (fromVal === 'gr' && toVal === 'lb') {
       dispatch({ type: 'grToLb', payload: Number(input) });
     } else if (fromVal === 'lb' && toVal === 'µg') {
@@ -109,7 +156,6 @@ const UnitConvert = () => {
     } else if (fromVal === 'oz' && toVal === 'cup-us-rice') {
       dispatch({ type: 'ozToCupRice', payload: Number(input) });
     }
-
     // Check if converting from milligrams (mg) to cups of sugar
     if (fromVal === 'mg' && toVal === 'cupSugar') {
       dispatch({ type: 'mgToCupSugar', payload: Number(input) });
@@ -130,7 +176,6 @@ const UnitConvert = () => {
     else if (fromVal === 'oz' && toVal === 'cupSugar') {
       dispatch({ type: 'ozToCupSugar', payload: Number(input) });
     }
-
     // Check if converting from milligrams (mg) to cups of rice
     else if (fromVal === 'mg' && toVal === 'cupRice') {
       dispatch({ type: 'mgToCupRice', payload: Number(input) });
@@ -153,13 +198,11 @@ const UnitConvert = () => {
     }
     Keyboard.dismiss();
   }
-
   function switchHandler() {
     const temp = fromVal;
     setFromVal(toVal);
     setToVal(temp);
   }
-
   const filteredAvailable = weights.filter((option) => {
     if (fromVal.includes('cup')) {
       return !option.value.includes('cup');
@@ -167,6 +210,25 @@ const UnitConvert = () => {
     // If fromVal doesn't contain "cup," enable all options
     return true;
   });
+
+  function handleClearAll() {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to clear all?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Clear All',
+          style: 'destructive',
+          onPress: () => setItems([]),
+        },
+      ],
+      { cancelable: true }
+    );
+  }
 
   return (
     <>
@@ -183,7 +245,7 @@ const UnitConvert = () => {
         items2={filteredAvailable}
         switchHandler={switchHandler}
       />
-      <Text className='text-orange-400 mb-11'>Henlo!!!!!!</Text>
+      <HistoryLayout items={items} clearAll={handleClearAll} />
     </>
   );
 };
