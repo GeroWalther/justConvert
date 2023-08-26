@@ -69,7 +69,7 @@ const ConvertComp = () => {
         ]);
       }
     }
-  }, [fromCur, toCur, convertedCur, isLoading]);
+  }, [convertedCur, isLoading]);
 
   function convertHandler() {
     setAmount(Number(text));
