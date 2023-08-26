@@ -20,17 +20,25 @@ const UnitConvert = () => {
 
   useEffect(() => {
     convertHandler();
-    setItems(() => [
-      ...items,
-      {
-        input,
-        fromVal,
-        toVal,
-        converted,
-        id: Date.now(),
-      },
-    ]);
-  }, [toVal, fromVal, input]);
+    const itemExists = items.some(
+      (item) =>
+        item.fromVal === fromVal &&
+        item.toVal === toVal &&
+        item.converted === converted
+    );
+    if (!itemExists) {
+      setItems(() => [
+        ...items,
+        {
+          input,
+          fromVal,
+          toVal,
+          converted,
+          id: Date.now(),
+        },
+      ]);
+    }
+  }, [toVal, fromVal, converted]);
 
   useEffect(() => {
     loadState();

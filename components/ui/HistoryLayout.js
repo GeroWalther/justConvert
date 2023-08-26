@@ -5,6 +5,7 @@ import Item from '../Flat/Item';
 
 export default function HistoryLayout({ items, clearAll }) {
   if (items.length === 0) return null;
+  console.log(items);
   return (
     <View className='flex-1 mt-20'>
       <View className='flex-row justify-between items-center p-4'>
