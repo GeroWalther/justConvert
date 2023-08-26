@@ -17,9 +17,11 @@ const UnitConvert = () => {
   const [input, setInput] = useState('1');
 
   const [items, setItems] = useState([]);
-
   useEffect(() => {
     convertHandler();
+  }, [converted, fromVal, toVal, input]);
+
+  useEffect(() => {
     const itemExists = items.some(
       (item) =>
         item.fromVal === fromVal &&
@@ -38,7 +40,7 @@ const UnitConvert = () => {
         },
       ]);
     }
-  }, [toVal, fromVal, converted]);
+  }, [converted]);
 
   useEffect(() => {
     loadState();
