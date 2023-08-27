@@ -20,6 +20,7 @@ const ConvertLayout = ({
   items2,
   isLoading = null,
   error = null,
+  error2,
 }) => {
   return (
     <View className='flex-1 gap-8'>
@@ -75,9 +76,19 @@ const ConvertLayout = ({
       </View>
 
       <View className='flex items-center justify-center bg-slate-900 py-4'>
-        <Text className='text-slate-50 text-center font-bold text-xl'>
-          {isLoading ? 'Converting...' : `${converted} ${toVal}`}
-          {error && 'Error converting !!'}
+        <Text
+          className={`text-center  ${
+            error || error2
+              ? 'text-orange-600 font-semibold text-base'
+              : 'text-slate-50 font-bold text-xl'
+          }`}>
+          {isLoading
+            ? 'Converting...'
+            : error
+            ? 'Error converting !!'
+            : error2
+            ? 'Input must be a number! \n No characters or signs allowed!'
+            : `${converted} ${toVal}`}
         </Text>
       </View>
     </View>

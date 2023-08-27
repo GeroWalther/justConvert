@@ -6,6 +6,8 @@ import { reducer } from '../services/lib/reducer';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 
+const pattern = /^[0-9]*$/;
+
 const initialState = {
   converted: 0,
 };
@@ -16,10 +18,12 @@ const UnitConvert = () => {
   const [toVal, setToVal] = useState('lb');
   const [input, setInput] = useState('1');
 
+  const [error, setError] = useState(null);
+
   const [items, setItems] = useState([]);
   useEffect(() => {
     convertHandler();
-  }, [converted, fromVal, toVal, input]);
+  }, [converted, fromVal, toVal]);
 
   useEffect(() => {
     const itemExists = items.some(
@@ -72,6 +76,13 @@ const UnitConvert = () => {
   };
 
   function convertHandler() {
+    if (!pattern.test(input)) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
+    }
+
     if (fromVal === 'kg' && toVal === 'lb') {
       dispatch({ type: 'kgToLb', payload: Number(input) });
     } else if (fromVal === 'lb' && toVal === 'kg') {
@@ -254,6 +265,7 @@ const UnitConvert = () => {
         items1={weights}
         items2={filteredAvailable}
         switchHandler={switchHandler}
+        error2={error}
       />
       <HistoryLayout items={items} clearAll={handleClearAll} />
     </>
