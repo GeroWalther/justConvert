@@ -20,7 +20,7 @@ const ConvertLayout = ({
   items2,
   isLoading = null,
   error = null,
-  error2,
+  error2 = null,
 }) => {
   return (
     <View className='flex-1 gap-8'>

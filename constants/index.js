@@ -44,5 +44,5 @@ export const lengths = [
   { label: 'Foot', value: 'ft' },
   { label: 'Yard', value: 'yd' },
   { label: 'Mile', value: 'mi' },
-  { label: 'Sea Mile (Nautical Mile)', value: 'nmi' },
+  { label: 'Sea Mile (nmi)', value: 'nmi' },
 ];

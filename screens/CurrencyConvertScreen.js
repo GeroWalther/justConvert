@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import CurrConvert from '../components/CurrConvert';
 
-const CurrencyScreen = () => {
+const CurrencyConvertScreen = () => {
   return (
     <View className='bg-slate-600 flex-1'>
       <Text className='text-slate-50 font-semibold text-center text-lg p-4 mb-5'>
@@ -13,4 +13,4 @@ const CurrencyScreen = () => {
   );
 };
 
-export default CurrencyScreen;
+export default CurrencyConvertScreen;

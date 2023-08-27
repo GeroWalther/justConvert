@@ -1,8 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CurrencyScreen from '../screens/CurrencyScreen';
-import UnitConvertScreen from '../screens/UnitConvertScreen';
+import CurrencyConvertScreen from '../screens/CurrencyConvertScreen';
+import WeightConvertScreen from '../screens/WeightConvertScreen';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import VolumeConvertScreen from '../screens/VolumeConvertScreen';
+import LengthConvertScreen from '../screens/LengthConvertScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,15 +26,29 @@ export default function TabNavigator() {
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === 'Currency') {
             return (
-              <MaterialIcons name='attach-money' size={35} color={color} />
+              <MaterialIcons name='attach-money' size={32} color={color} />
             );
-          } else if (route.name === 'Unit') {
-            return <Entypo name='ruler' size={30} color={color} />;
+          } else if (route.name === 'Weight') {
+            return (
+              <MaterialCommunityIcons name='weight' size={28} color={color} />
+            );
+          } else if (route.name === 'Length') {
+            return <Entypo name='ruler' size={28} color={color} />;
+          } else if (route.name === 'Volume') {
+            return (
+              <MaterialCommunityIcons
+                name='cup-water'
+                size={28}
+                color={color}
+              />
+            );
           }
         },
       })}>
-      <Tab.Screen name='Currency' component={CurrencyScreen} />
-      <Tab.Screen name='Unit' component={UnitConvertScreen} />
+      <Tab.Screen name='Currency' component={CurrencyConvertScreen} />
+      <Tab.Screen name='Weight' component={WeightConvertScreen} />
+      <Tab.Screen name='Length' component={LengthConvertScreen} />
+      <Tab.Screen name='Volume' component={VolumeConvertScreen} />
     </Tab.Navigator>
   );
 }

@@ -1,15 +1,15 @@
 import { Text, View } from 'react-native';
-import UnitConvert from '../components/UnitConvert';
+import LengthConvert from '../components/LengthConvert';
 
-const UnitConvertScreen = () => {
+const LengthConvertScreen = () => {
   return (
     <View className='bg-slate-600 flex-1'>
       <Text className='text-slate-50 font-semibold text-center text-lg p-4 mb-5'>
         justConvert logo
       </Text>
-      <UnitConvert />
+      <LengthConvert />
     </View>
   );
 };
 
-export default UnitConvertScreen;
+export default LengthConvertScreen;

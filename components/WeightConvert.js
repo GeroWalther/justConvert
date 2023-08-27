@@ -12,7 +12,7 @@ const initialState = {
   converted: 0,
 };
 
-const UnitConvert = () => {
+const WeightConvert = () => {
   const [{ converted }, dispatch] = useReducer(reducer, initialState);
   const [fromVal, setFromVal] = useState('kg');
   const [toVal, setToVal] = useState('lb');
@@ -272,4 +272,4 @@ const UnitConvert = () => {
   );
 };
 
-export default UnitConvert;
+export default WeightConvert;
