@@ -2,7 +2,7 @@ import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Keyboard, Alert } from 'react-native';
 import { weights } from '../constants';
-import { reducer } from '../services/lib/reducer';
+import { weightReducer } from '../services/lib/reducer';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const WeightConvert = () => {
-  const [{ converted }, dispatch] = useReducer(reducer, initialState);
+  const [{ converted }, dispatch] = useReducer(weightReducer, initialState);
   const [fromVal, setFromVal] = useState('kg');
   const [toVal, setToVal] = useState('lb');
   const [input, setInput] = useState('1');

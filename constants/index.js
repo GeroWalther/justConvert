@@ -7,13 +7,13 @@ export const currencies = [
 ];
 
 export const weights = [
-  { label: 'Gram', value: 'gr' },
-  { label: 'Kilogram', value: 'kg' },
-  { label: 'Milligram', value: 'mg' },
-  { label: 'Microgram', value: 'µg' },
-  { label: 'Metric Ton', value: 'ton' },
-  { label: 'Pound', value: 'lb' },
-  { label: 'Ounce', value: 'oz' },
+  { label: 'Gram (gr)', value: 'gr' },
+  { label: 'Kilogram (kg)', value: 'kg' },
+  { label: 'Milligram (mg)', value: 'mg' },
+  { label: 'Microgram (µg)', value: 'µg' },
+  { label: 'Metric Ton (ton)', value: 'ton' },
+  { label: 'Pound (lb)', value: 'lb' },
+  { label: 'Ounce (oz)', value: 'oz' },
   { label: 'Cup Flour (US)', value: 'cup-us-flour' },
   { label: 'Cup Sugar (US)', value: 'cup-us-sugar' },
   { label: 'Cup Rice (US)', value: 'cup-us-rice' },
@@ -25,8 +25,8 @@ export const volumes = [
   { label: 'Centiliter (cl)', value: 'cl' },
   { label: 'Deciliter (dl)', value: 'dl' },
   { label: 'Liter (l)', value: 'l' },
-  { label: 'Cubic Centimeter (cm3)', value: 'cm3' },
-  { label: 'Cubic Meter (m3)', value: 'm3' },
+  { label: 'Cubic Centimeter (cm³)', value: 'cm³' },
+  { label: 'Cubic Meter (m³)', value: 'm³' },
   { label: 'Fluid Ounce (fl-oz)', value: 'fl-oz' },
   { label: 'Gallon (US)', value: 'gal' },
   { label: 'Pint (US)', value: 'pt' },
@@ -36,13 +36,28 @@ export const volumes = [
 ];
 
 export const lengths = [
-  { label: 'Millimeter', value: 'mm' },
-  { label: 'Centimeter', value: 'cm' },
-  { label: 'Meter', value: 'm' },
-  { label: 'Kilometer', value: 'km' },
-  { label: 'Inch', value: 'in' },
-  { label: 'Foot', value: 'ft' },
-  { label: 'Yard', value: 'yd' },
-  { label: 'Mile', value: 'mi' },
+  { label: 'Millimeter (mm)', value: 'mm' },
+  { label: 'Centimeter (cm)', value: 'cm' },
+  { label: 'Meter (m)', value: 'm' },
+  { label: 'Kilometer (km)', value: 'km' },
+  { label: 'Inch (in)', value: 'in' },
+  { label: 'Foot (ft)', value: 'ft' },
+  { label: 'Yard (yd)', value: 'yd' },
+  { label: 'Mile (mi)', value: 'mi' },
   { label: 'Sea Mile (nmi)', value: 'nmi' },
+];
+
+export const areas = [
+  { label: 'Square Millimeter (mm²)', value: 'mm2' },
+  { label: 'Square Centimeter (cm²)', value: 'cm2' },
+  { label: 'Square Meter (m²)', value: 'm2' },
+  { label: 'Square Kilometer (km²)', value: 'km2' },
+  { label: 'Square Inch (in²)', value: 'in2' },
+  { label: 'Square Foot (ft²)', value: 'ft2' },
+  { label: 'Square Yard (yd²)', value: 'yd2' },
+  { label: 'Square Mile (mi²)', value: 'mi2' },
+  { label: 'Square Sea Mile (nmi²)', value: 'nmi2' },
+  { label: 'Acre (ac)', value: 'ac' },
+  { label: 'Hectare (ha)', value: 'ha' },
+  { label: 'Tatami Mat', value: 'tatami' },
 ];

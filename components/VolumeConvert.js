@@ -1,10 +1,10 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Keyboard, Alert, Text } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 import { volumes } from '../constants';
-import { reducer } from '../services/lib/reducer';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
+import { volumeReducer } from '../services/lib/commonReducers';
 
 const pattern = /^[0-9]*$/;
 
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const VolumeConvert = () => {
-  const [{ converted }, dispatch] = useReducer(reducer, initialState);
+  const [{ converted }, dispatch] = useReducer(volumeReducer, initialState);
   const [fromVal, setFromVal] = useState('ml');
   const [toVal, setToVal] = useState('fl-oz');
   const [input, setInput] = useState('1');
@@ -82,7 +82,16 @@ const VolumeConvert = () => {
     } else {
       setError(false);
     }
-
+    const actionType = `${fromVal}To${toVal}`;
+    const inputValue = parseFloat(input);
+    dispatch({
+      type: actionType,
+      payload: {
+        value: inputValue,
+        fromUnit: fromVal,
+        toUnit: toVal,
+      },
+    });
     Keyboard.dismiss();
   }
   function switchHandler() {
@@ -133,7 +142,6 @@ const VolumeConvert = () => {
         switchHandler={switchHandler}
         error2={error}
       />
-      <Text className='text-orange-500 text-2xl'>Volume!!!!</Text>
       <HistoryLayout items={items} clearAll={handleClearAll} />
     </>
   );

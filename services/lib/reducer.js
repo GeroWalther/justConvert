@@ -5,7 +5,7 @@ function convertUnit(value, fromUnit, toUnit, decimalPlaces) {
   return parseFloat(result.toFixed(decimalPlaces));
 }
 
-export function reducer(state, action) {
+export function weightReducer(state, action) {
   switch (action.type) {
     case 'kgToLb':
       return {

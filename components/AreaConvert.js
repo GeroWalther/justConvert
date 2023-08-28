@@ -1,11 +1,11 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Keyboard, Alert } from 'react-native';
-import { lengths } from '../constants';
-
+import { Keyboard, Alert, Text } from 'react-native';
+import { areas } from '../constants';
+import { reducer } from '../services/lib/reducer';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
-import { lengthReducer } from '../services/lib/commonReducers';
+import { areaReducer } from '../services/lib/commonReducers';
 
 const pattern = /^[0-9]*$/;
 
@@ -13,10 +13,10 @@ const initialState = {
   converted: 0,
 };
 
-const LengthConvert = () => {
-  const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);
-  const [fromVal, setFromVal] = useState('m');
-  const [toVal, setToVal] = useState('yd');
+const AreaConvert = () => {
+  const [{ converted }, dispatch] = useReducer(areaReducer, initialState);
+  const [fromVal, setFromVal] = useState('m2');
+  const [toVal, setToVal] = useState('ft2');
   const [input, setInput] = useState('1');
 
   const [error, setError] = useState(null);
@@ -58,7 +58,7 @@ const LengthConvert = () => {
   const loadState = async () => {
     try {
       // Load the saved state from local storage
-      const savedState = await AsyncStorage.getItem('appStateLength');
+      const savedState = await AsyncStorage.getItem('appStateArea');
       if (savedState !== null) {
         const { items: savedItems } = JSON.parse(savedState);
         setItems(savedItems);
@@ -70,7 +70,7 @@ const LengthConvert = () => {
   const saveState = async () => {
     try {
       const appState = JSON.stringify({ items });
-      await AsyncStorage.setItem('appStateLength', appState);
+      await AsyncStorage.setItem('appStateArea', appState);
     } catch (error) {
       console.log('Error saving state to local storage:', error);
     }
@@ -93,7 +93,6 @@ const LengthConvert = () => {
         toUnit: toVal,
       },
     });
-
     Keyboard.dismiss();
   }
   function switchHandler() {
@@ -132,14 +131,15 @@ const LengthConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={lengths}
-        items2={lengths}
+        items1={areas}
+        items2={areas}
         switchHandler={switchHandler}
         error2={error}
       />
+      <Text className='text-orange-500 text-2xl'>Area!!!!</Text>
       <HistoryLayout items={items} clearAll={handleClearAll} />
     </>
   );
 };
 
-export default LengthConvert;
+export default AreaConvert;

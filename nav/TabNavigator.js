@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import VolumeConvertScreen from '../screens/VolumeConvertScreen';
 import LengthConvertScreen from '../screens/LengthConvertScreen';
+import AreaConvertScreen from '../screens/AreaConvertScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,6 +43,14 @@ export default function TabNavigator() {
                 color={color}
               />
             );
+          } else if (route.name === 'Area') {
+            return (
+              <MaterialCommunityIcons
+                name='focus-field'
+                size={28}
+                color={color}
+              />
+            );
           }
         },
       })}>
@@ -49,6 +58,7 @@ export default function TabNavigator() {
       <Tab.Screen name='Weight' component={WeightConvertScreen} />
       <Tab.Screen name='Length' component={LengthConvertScreen} />
       <Tab.Screen name='Volume' component={VolumeConvertScreen} />
+      <Tab.Screen name='Area' component={AreaConvertScreen} />
     </Tab.Navigator>
   );
 }
