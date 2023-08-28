@@ -136,7 +136,6 @@ const AreaConvert = () => {
         switchHandler={switchHandler}
         error2={error}
       />
-      <Text className='text-orange-500 text-2xl'>Area!!!!</Text>
       <HistoryLayout items={items} clearAll={handleClearAll} />
     </>
   );
