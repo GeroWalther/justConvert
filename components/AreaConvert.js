@@ -1,8 +1,7 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Keyboard, Alert, Text } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 import { areas } from '../constants';
-import { reducer } from '../services/lib/reducer';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { areaReducer } from '../services/lib/commonReducers';
