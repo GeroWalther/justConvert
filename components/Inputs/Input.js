@@ -9,6 +9,7 @@ const Input = ({ text, setText, editable = true, keyboard = 'number-pad' }) => {
       value={text}
       onChangeText={setText}
       editable={editable}
+      maxLength={14}
     />
   );
 };

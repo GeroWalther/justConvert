@@ -82,8 +82,8 @@ const VolumeConvert = () => {
     } else {
       setError(false);
     }
-    const actionType = `${fromVal}To${toVal}`;
     const inputValue = parseFloat(input);
+    const actionType = `${fromVal}To${toVal}`;
     dispatch({
       type: actionType,
       payload: {
@@ -99,13 +99,6 @@ const VolumeConvert = () => {
     setFromVal(toVal);
     setToVal(temp);
   }
-  const filteredAvailable = volumes.filter((option) => {
-    if (fromVal.includes('cup')) {
-      return !option.value.includes('cup');
-    }
-    // If fromVal doesn't contain "cup," enable all options
-    return true;
-  });
 
   function handleClearAll() {
     Alert.alert(
@@ -138,7 +131,7 @@ const VolumeConvert = () => {
         setFromVal={setFromVal}
         setInput={setInput}
         items1={volumes}
-        items2={filteredAvailable}
+        items2={volumes}
         switchHandler={switchHandler}
         error2={error}
       />

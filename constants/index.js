@@ -25,14 +25,12 @@ export const volumes = [
   { label: 'Centiliter (cl)', value: 'cl' },
   { label: 'Deciliter (dl)', value: 'dl' },
   { label: 'Liter (l)', value: 'l' },
-  { label: 'Cubic Centimeter (cm³)', value: 'cm³' },
-  { label: 'Cubic Meter (m³)', value: 'm³' },
+  { label: 'Cubic Centimeter (cm³)', value: 'cm3' },
+  { label: 'Cubic Meter (m³)', value: 'm3' },
   { label: 'Fluid Ounce (fl-oz)', value: 'fl-oz' },
   { label: 'Gallon (US)', value: 'gal' },
   { label: 'Pint (US)', value: 'pt' },
-  { label: 'Cup (US) - Water', value: 'cup-us-water' },
-  { label: 'Cup (US) - Milk', value: 'cup-us-milk' },
-  { label: 'Cup (US) - Oil', value: 'cup-us-oil' },
+  { label: 'Cup (US)', value: 'cup' },
 ];
 
 export const lengths = [
@@ -56,7 +54,6 @@ export const areas = [
   { label: 'Square Foot (ft²)', value: 'ft2' },
   { label: 'Square Yard (yd²)', value: 'yd2' },
   { label: 'Square Mile (mi²)', value: 'mi2' },
-  { label: 'Square Sea Mile (nmi²)', value: 'nmi2' },
   { label: 'Acre (ac)', value: 'ac' },
   { label: 'Hectare (ha)', value: 'ha' },
   { label: 'Tatami Mat', value: 'tatami' },

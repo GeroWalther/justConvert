@@ -22,6 +22,9 @@ const ConvertLayout = ({
   error = null,
   error2 = null,
 }) => {
+  const convertedFormatted = new Intl.NumberFormat('en-US').format(converted);
+  // const formattedInput = new Intl.NumberFormat('en-US').format(input);
+
   return (
     <View className='flex-1 gap-8'>
       <View className='flex-row justify-around items-center px-4'>
@@ -88,7 +91,10 @@ const ConvertLayout = ({
             ? 'Error converting !!'
             : error2
             ? 'Input must be a number! \n No characters or signs allowed!'
-            : `${converted} ${toVal}`}
+            : `${convertedFormatted} ${toVal
+                .replace(/-us-/g, ' ')
+                .replace(/2/g, '²')
+                .replace(/3/g, '³')}`}
         </Text>
       </View>
     </View>
