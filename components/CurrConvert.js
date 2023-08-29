@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Keyboard, Alert } from 'react-native';
+import { Keyboard, Alert, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { currencies } from '../constants';
+import { currencies, currenciesPro } from '../constants';
 import { useCurrConvert } from '../hooks/useCurrConvert';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
@@ -111,8 +111,8 @@ const ConvertComp = () => {
         setToVal={setToCur}
         setFromVal={setFromCur}
         setInput={setText}
-        items1={currencies}
-        items2={currencies}
+        items1={currenciesPro}
+        items2={currenciesPro}
         isLoading={isLoading}
         error={error}
       />
