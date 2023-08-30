@@ -5,6 +5,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import GreenBtn from '../Btn/GreenBtn';
 import Input from '../Inputs/Input';
 import SwapBtn from '../Btn/SwapBtn';
+import { useNumberFormatter } from '../../hooks/useNumberFormatter';
 
 const ConvertLayout = ({
   converted,
@@ -22,13 +23,15 @@ const ConvertLayout = ({
   error = null,
   error2 = null,
 }) => {
-  const convertedFormatted = new Intl.NumberFormat('en-US').format(converted);
-  // const formattedInput = new Intl.NumberFormat('en-US').format(input);
+  const {formatNumber, revertNumberFormat} = useNumberFormatter();
+  const convertedFormatted = formatNumber(converted);
+
+  const onChangeCurrencyValue = (value) =>  setInput(revertNumberFormat(value));
 
   return (
     <View className='flex-1 gap-8'>
       <View className='flex-row justify-around items-center px-4'>
-        <Input text={input} setText={(tx) => setInput(tx)} />
+        <Input text={formatNumber(input)} setText={onChangeCurrencyValue} />
         <View className='gap-3 items-center'>
           <View>
             <RNPickerSelect
