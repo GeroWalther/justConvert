@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './nav/TabNavigator';
+//import Purchases from 'react-native-purchases';
 
 const queryClient = new QueryClient({
   defaultOptions: {
