@@ -1,4 +1,4 @@
-import { areas, lengths, volumes, weights } from '../../constants';
+import { areas, volumes, weights } from '../../constants';
 import convert from 'convert-units';
 
 // Generic conversion function
@@ -30,13 +30,13 @@ function generateConversionCases(units) {
   return conversionCases;
 }
 
-const lengthConversionCases = generateConversionCases(lengths);
-
 export function lengthReducer(state, action) {
-  const conversionCases = lengthConversionCases;
+  const conversionCases = generateConversionCases(state.array);
   if (action.type in conversionCases) {
     let newValue;
-    if (action.type === 'nmiTom') {
+    if (action.type === 'arr') {
+      return { ...state, array: action.payload.array };
+    } else if (action.type === 'nmiTom') {
       newValue = action.payload.value * 1852;
     } else if (action.type === 'mTonmi') {
       newValue = action.payload.value / 1852;
@@ -67,7 +67,7 @@ export function lengthReducer(state, action) {
     } else if (action.type === 'nmiTomm') {
       newValue = action.payload.value * 1852000;
     } else if (action.type === 'mmTonmi') {
-      newValue = (action.payload.value / 1852000).toFixed(6);
+      newValue = action.payload.value / 1852000;
     } else {
       newValue = convertUnit(
         action.payload.value,
@@ -75,7 +75,6 @@ export function lengthReducer(state, action) {
         action.payload.toUnit
       );
     }
-
     return {
       ...state,
       converted: newValue,
@@ -100,7 +99,7 @@ export function areaReducer(state, action) {
     } else if (action.type === 'tatamiTom2') {
       newValue = action.payload.value * 1.62; // Convert to Square Meter (m²)
     } else if (action.type === 'm2Totatami') {
-      newValue = (action.payload.value / 1.62).toFixed(4); // Convert from Square Meter (m²) to Tatami Mat
+      newValue = action.payload.value / 1.62; // Convert from Square Meter (m²) to Tatami Mat
     } else if (action.type === 'tatamiTokm2') {
       newValue = action.payload.value / (1.62 * 1000000); // Convert to Square Kilometer (km²)
     } else if (action.type === 'km2Totatami') {

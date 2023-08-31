@@ -87,8 +87,6 @@ const WeightConvert = () => {
     }
     const actionType = `${fromVal}To${toVal}`;
     const inputValue = parseFloat(input);
-    console.log(actionType);
-    console.log(inputValue);
     dispatch({
       type: actionType,
       payload: {

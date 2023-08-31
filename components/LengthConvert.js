@@ -10,21 +10,29 @@ const pattern = /^[0-9]*$/;
 
 const initialState = {
   converted: 0,
+  array: lengths,
 };
 
 const LengthConvert = () => {
   const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);
-  const [fromVal, setFromVal] = useState('m');
-  const [toVal, setToVal] = useState('yd');
+  const [fromVal, setFromVal] = useState('in');
+  const [toVal, setToVal] = useState('cm');
   const [input, setInput] = useState('1');
 
   const [error, setError] = useState(null);
 
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     convertHandler();
   }, [converted, fromVal, toVal]);
+
+  useEffect(() => {
+    proMember
+      ? dispatch({ type: 'arr', payload: lengthsPro })
+      : dispatch({ type: 'arr', payload: lengths });
+  }, [proMember]);
 
   useEffect(() => {
     const itemExists = items.some(
@@ -85,7 +93,6 @@ const LengthConvert = () => {
     }
     const actionType = `${fromVal}To${toVal}`;
     const inputValue = parseFloat(input);
-    console.log('length:', inputValue, actionType);
     dispatch({
       type: actionType,
       payload: {
