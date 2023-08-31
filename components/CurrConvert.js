@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Keyboard, Alert, View } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { currencies, currenciesPro } from '../constants';
 import { useCurrConvert } from '../hooks/useCurrConvert';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
+import { useProSub } from './context/ctx';
 
 const ConvertComp = () => {
+  const { proMember } = useProSub();
+
   const [text, setText] = useState('1');
   const [amount, setAmount] = useState(1);
   const [fromCur, setFromCur] = useState('EUR');
@@ -24,7 +27,6 @@ const ConvertComp = () => {
 
   const loadState = async () => {
     try {
-      // Load the saved state from local storage
       const savedState = await AsyncStorage.getItem('appStateCurr');
       if (savedState !== null) {
         const { items: savedItems } = JSON.parse(savedState);
@@ -111,8 +113,8 @@ const ConvertComp = () => {
         setToVal={setToCur}
         setFromVal={setFromCur}
         setInput={setText}
-        items1={currenciesPro}
-        items2={currenciesPro}
+        items1={proMember ? currenciesPro : currencies}
+        items2={proMember ? currenciesPro : currencies}
         isLoading={isLoading}
         error={error}
       />

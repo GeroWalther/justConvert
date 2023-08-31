@@ -1,11 +1,11 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Keyboard, Alert } from 'react-native';
-import { lengths } from '../constants';
+import { lengths, lengthsPro } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { lengthReducer } from '../services/lib/commonReducers';
-
+import { useProSub } from './context/ctx';
 const pattern = /^[0-9]*$/;
 
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const LengthConvert = () => {
+  const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);
   const [fromVal, setFromVal] = useState('m');
   const [toVal, setToVal] = useState('yd');
@@ -84,6 +85,7 @@ const LengthConvert = () => {
     }
     const actionType = `${fromVal}To${toVal}`;
     const inputValue = parseFloat(input);
+    console.log('length:', inputValue, actionType);
     dispatch({
       type: actionType,
       payload: {
@@ -131,8 +133,8 @@ const LengthConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={lengths}
-        items2={lengths}
+        items1={proMember ? lengthsPro : lengths}
+        items2={proMember ? lengthsPro : lengths}
         switchHandler={switchHandler}
         error2={error}
       />

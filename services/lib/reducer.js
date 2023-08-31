@@ -123,10 +123,10 @@ export function weightReducer(state, action) {
         ...state,
         converted: convertUnit(action.payload, 'gr', 'oz', 2),
       };
-    case 'kgToµg':
+    case 'kgToMcg':
       return {
         ...state,
-        converted: convertUnit(action.payload, 'kg', 'µg', 10),
+        converted: convertUnit(action.payload, 'kg', 'mcg', 10),
       };
     case 'lbToµg':
       return { ...state, converted: action.payload * 453592370 };

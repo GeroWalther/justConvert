@@ -1,10 +1,11 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Keyboard, Alert } from 'react-native';
-import { areas } from '../constants';
+import { areas, areasPro } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { areaReducer } from '../services/lib/commonReducers';
+import { useProSub } from './context/ctx';
 
 const pattern = /^[0-9]*$/;
 
@@ -13,6 +14,7 @@ const initialState = {
 };
 
 const AreaConvert = () => {
+  const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(areaReducer, initialState);
   const [fromVal, setFromVal] = useState('m2');
   const [toVal, setToVal] = useState('ft2');
@@ -130,8 +132,8 @@ const AreaConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={areas}
-        items2={areas}
+        items1={proMember ? areasPro : areas}
+        items2={proMember ? areasPro : areas}
         switchHandler={switchHandler}
         error2={error}
       />

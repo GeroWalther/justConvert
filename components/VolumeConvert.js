@@ -1,10 +1,11 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Keyboard, Alert } from 'react-native';
-import { volumes } from '../constants';
+import { volumes, volumesPro } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { volumeReducer } from '../services/lib/commonReducers';
+import { useProSub } from './context/ctx';
 
 const pattern = /^[0-9]*$/;
 
@@ -13,6 +14,7 @@ const initialState = {
 };
 
 const VolumeConvert = () => {
+  const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(volumeReducer, initialState);
   const [fromVal, setFromVal] = useState('ml');
   const [toVal, setToVal] = useState('fl-oz');
@@ -130,8 +132,8 @@ const VolumeConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={volumes}
-        items2={volumes}
+        items1={proMember ? volumesPro : volumes}
+        items2={proMember ? volumesPro : volumes}
         switchHandler={switchHandler}
         error2={error}
       />

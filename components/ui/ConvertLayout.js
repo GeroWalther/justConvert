@@ -23,10 +23,10 @@ const ConvertLayout = ({
   error = null,
   error2 = null,
 }) => {
-  const {formatNumber, revertNumberFormat} = useNumberFormatter();
+  const { formatNumber, revertNumberFormat } = useNumberFormatter();
   const convertedFormatted = formatNumber(converted);
 
-  const onChangeCurrencyValue = (value) =>  setInput(revertNumberFormat(value));
+  const onChangeCurrencyValue = (value) => setInput(revertNumberFormat(value));
 
   return (
     <View className='flex-1 gap-8'>
@@ -120,14 +120,12 @@ const pickerSelectStyles = StyleSheet.create({
     alignItems: 'center',
   },
   inputAndroid: {
+    size: 10,
     color: '#2c2c2c',
     backgroundColor: '#e2e2e2',
     paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 15,
-    height: 34,
-    width: '30%',
-    fontWeight: 'bold',
+    paddingHorizontal: 100,
+    height: 54,
     justifyContent: 'center',
     alignItems: 'center',
   },

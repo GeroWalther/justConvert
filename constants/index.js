@@ -1,9 +1,6 @@
 export const currencies = [
   { label: 'USD', value: 'USD' },
   { label: 'EUR', value: 'EUR' },
-  { label: 'JPY', value: 'JPY' },
-  { label: 'GBP', value: 'GBP' },
-  { label: 'CAD', value: 'CAD' },
 ];
 const data = {
   AUD: 'Australian Dollar',
@@ -44,11 +41,11 @@ export const currenciesPro = Object.keys(data).map((key) => ({
   value: key,
 }));
 
-export const weights = [
-  { label: 'Gram (gr)', value: 'gr' },
+export const weightsPro = [
+  { label: 'Gram (g)', value: 'g' },
   { label: 'Kilogram (kg)', value: 'kg' },
   { label: 'Milligram (mg)', value: 'mg' },
-  { label: 'Microgram (µg)', value: 'µg' },
+  { label: 'Microgram (µg)', value: 'mcg' },
   { label: 'Metric Ton (ton)', value: 'ton' },
   { label: 'Pound (lb)', value: 'lb' },
   { label: 'Ounce (oz)', value: 'oz' },
@@ -57,8 +54,14 @@ export const weights = [
   { label: 'Cup Rice (US)', value: 'cup-us-rice' },
   { label: 'Cup Oats (US)', value: 'cup-us-oats' },
 ];
+export const weights = [
+  { label: 'Gram (g)', value: 'g' },
+  { label: 'Kilogram (kg)', value: 'kg' },
+  { label: 'Pound (lb)', value: 'lb' },
+  { label: 'Cup Sugar (US)', value: 'cup-us-sugar' },
+];
 
-export const volumes = [
+export const volumesPro = [
   { label: 'Milliliter (ml)', value: 'ml' },
   { label: 'Centiliter (cl)', value: 'cl' },
   { label: 'Deciliter (dl)', value: 'dl' },
@@ -70,8 +73,14 @@ export const volumes = [
   { label: 'Pint (US)', value: 'pt' },
   { label: 'Cup (US)', value: 'cup' },
 ];
+export const volumes = [
+  { label: 'Milliliter (ml)', value: 'ml' },
+  { label: 'Liter (l)', value: 'l' },
+  { label: 'Fluid Ounce (fl-oz)', value: 'fl-oz' },
+  { label: 'Cup (US)', value: 'cup' },
+];
 
-export const lengths = [
+export const lengthsPro = [
   { label: 'Millimeter (mm)', value: 'mm' },
   { label: 'Centimeter (cm)', value: 'cm' },
   { label: 'Meter (m)', value: 'm' },
@@ -82,8 +91,14 @@ export const lengths = [
   { label: 'Mile (mi)', value: 'mi' },
   { label: 'Sea Mile (nmi)', value: 'nmi' },
 ];
+export const lengths = [
+  { label: 'Centimeter (cm)', value: 'cm' },
+  { label: 'Meter (m)', value: 'm' },
+  { label: 'Inch (in)', value: 'in' },
+  { label: 'Mile (mi)', value: 'mi' },
+];
 
-export const areas = [
+export const areasPro = [
   { label: 'Square Millimeter (mm²)', value: 'mm2' },
   { label: 'Square Centimeter (cm²)', value: 'cm2' },
   { label: 'Square Meter (m²)', value: 'm2' },
@@ -95,4 +110,10 @@ export const areas = [
   { label: 'Acre (ac)', value: 'ac' },
   { label: 'Hectare (ha)', value: 'ha' },
   { label: 'Tatami Mat', value: 'tatami' },
+];
+export const areas = [
+  { label: 'Square Meter (m²)', value: 'm2' },
+  { label: 'Square Foot (ft²)', value: 'ft2' },
+  { label: 'Acre (ac)', value: 'ac' },
+  { label: 'Hectare (ha)', value: 'ha' },
 ];
