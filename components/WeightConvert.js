@@ -10,11 +10,11 @@ import { useProSub } from './context/ctx';
 const pattern = /^[0-9]*$/;
 
 const WeightConvert = () => {
+  const { proMember } = useProSub();
   const initialState = {
     converted: 0,
     array: proMember ? weightsPro : weights,
   };
-  const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(weightReducer, initialState);
   const [fromVal, setFromVal] = useState('kg');
   const [toVal, setToVal] = useState('lb');

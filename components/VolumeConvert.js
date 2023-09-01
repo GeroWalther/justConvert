@@ -10,11 +10,11 @@ import { useProSub } from './context/ctx';
 const pattern = /^[0-9]*$/;
 
 const VolumeConvert = () => {
+  const { proMember } = useProSub();
   const initialState = {
     converted: 0,
     array: proMember ? volumesPro : volumes,
   };
-  const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(volumeReducer, initialState);
   const [fromVal, setFromVal] = useState('ml');
   const [toVal, setToVal] = useState('fl-oz');
@@ -23,6 +23,9 @@ const VolumeConvert = () => {
   const [error, setError] = useState(null);
 
   const [items, setItems] = useState([]);
+  console.log('proMember:', proMember);
+  console.log('volumes:', volumes);
+  console.log('volumesPro:', volumesPro);
   useEffect(() => {
     convertHandler();
   }, [converted, fromVal, toVal]);

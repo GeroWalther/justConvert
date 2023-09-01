@@ -9,11 +9,11 @@ import { useProSub } from './context/ctx';
 const pattern = /^[0-9]*$/;
 
 const LengthConvert = () => {
+  const { proMember } = useProSub();
   const initialState = {
     converted: 0,
     array: proMember ? lengthsPro : lengths,
   };
-  const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);
   const [fromVal, setFromVal] = useState('in');
   const [toVal, setToVal] = useState('cm');

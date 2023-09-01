@@ -1,8 +1,11 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useFonts } from 'expo-font';
+import SubBtn from '../Btn/SubBtn';
+import { useProSub } from '../context/ctx';
 
-const Logo = () => {
+const Logo = ({ setModal }) => {
+  const { proMember } = useProSub();
   const [fontsLoaded] = useFonts({
     Monoton: require('../../assets/fonts/Monoton-Regular.ttf'),
   });
@@ -10,8 +13,9 @@ const Logo = () => {
     return <ActivityIndicator />;
   }
   return (
-    <View style={styles.con}>
+    <View style={styles.con} className='flex-row justify-around'>
       <Text style={styles.LogoTxt}>justConvert</Text>
+      {!proMember && <SubBtn onPress={() => setModal(true)} />}
     </View>
   );
 };
