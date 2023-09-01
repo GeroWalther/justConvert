@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CurrencyConvertScreen from '../screens/CurrencyConvertScreen';
 import WeightConvertScreen from '../screens/WeightConvertScreen';
@@ -10,7 +11,12 @@ import AreaConvertScreen from '../screens/AreaConvertScreen';
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+export default function TabNavigator({ navigation }) {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

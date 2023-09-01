@@ -1,6 +1,7 @@
-import { View, Text, Pressable, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Pressable, ScrollView } from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
+import { useNavigation } from '@react-navigation/native';
 
 function CloseBtn({ onClose, children }) {
   return (
@@ -21,7 +22,8 @@ const Btn = ({ children = 'Convert', onPress }) => {
   );
 };
 
-export default ProMemberModal = ({ onClose, isVisible }) => {
+const ProMemberModal = ({ onClose, isVisible }) => {
+  const navigation = useNavigation();
   return (
     <Modal onBackdropPress={onClose} isVisible={isVisible}>
       <View className='bg-slate-300 rounded-lg flex-row justify-center items-center'>
@@ -66,7 +68,13 @@ export default ProMemberModal = ({ onClose, isVisible }) => {
             </Text>
 
             <View className='flex-row justify-around mt-6'>
-              <Btn onPress={() => {}}>Upgrade Now</Btn>
+              <Btn
+                onPress={() => {
+                  console.log('clicked nav');
+                  navigation.navigate('SubModal');
+                }}>
+                Upgrade Now
+              </Btn>
               <CloseBtn onClose={onClose}>Not for now</CloseBtn>
             </View>
           </View>
@@ -75,3 +83,4 @@ export default ProMemberModal = ({ onClose, isVisible }) => {
     </Modal>
   );
 };
+export default ProMemberModal;

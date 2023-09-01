@@ -23,9 +23,6 @@ const VolumeConvert = () => {
   const [error, setError] = useState(null);
 
   const [items, setItems] = useState([]);
-  console.log('proMember:', proMember);
-  console.log('volumes:', volumes);
-  console.log('volumesPro:', volumesPro);
   useEffect(() => {
     convertHandler();
   }, [converted, fromVal, toVal]);
