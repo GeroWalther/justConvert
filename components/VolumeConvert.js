@@ -9,11 +9,11 @@ import { useProSub } from './context/ctx';
 
 const pattern = /^[0-9]*$/;
 
-const initialState = {
-  converted: 0,
-};
-
 const VolumeConvert = () => {
+  const initialState = {
+    converted: 0,
+    array: proMember ? volumesPro : volumes,
+  };
   const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(volumeReducer, initialState);
   const [fromVal, setFromVal] = useState('ml');
@@ -26,6 +26,12 @@ const VolumeConvert = () => {
   useEffect(() => {
     convertHandler();
   }, [converted, fromVal, toVal]);
+
+  useEffect(() => {
+    proMember
+      ? dispatch({ type: 'arr', payload: volumesPro })
+      : dispatch({ type: 'arr', payload: volumes });
+  }, [proMember]);
 
   useEffect(() => {
     const itemExists = items.some(

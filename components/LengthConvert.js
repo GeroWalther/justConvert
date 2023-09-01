@@ -8,12 +8,11 @@ import { lengthReducer } from '../services/lib/commonReducers';
 import { useProSub } from './context/ctx';
 const pattern = /^[0-9]*$/;
 
-const initialState = {
-  converted: 0,
-  array: lengths,
-};
-
 const LengthConvert = () => {
+  const initialState = {
+    converted: 0,
+    array: proMember ? lengthsPro : lengths,
+  };
   const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);
   const [fromVal, setFromVal] = useState('in');

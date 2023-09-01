@@ -9,11 +9,11 @@ import { useProSub } from './context/ctx';
 
 const pattern = /^[0-9]*$/;
 
-const initialState = {
-  converted: 0,
-};
-
 const AreaConvert = () => {
+  const initialState = {
+    converted: 0,
+    array: proMember ? areasPro : areas,
+  };
   const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(areaReducer, initialState);
   const [fromVal, setFromVal] = useState('m2');
@@ -26,6 +26,12 @@ const AreaConvert = () => {
   useEffect(() => {
     convertHandler();
   }, [converted, fromVal, toVal]);
+
+  useEffect(() => {
+    proMember
+      ? dispatch({ type: 'arr', payload: areasPro })
+      : dispatch({ type: 'arr', payload: areas });
+  }, [proMember]);
 
   useEffect(() => {
     const itemExists = items.some(

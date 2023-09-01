@@ -35,7 +35,7 @@ export function lengthReducer(state, action) {
   if (action.type in conversionCases) {
     let newValue;
     if (action.type === 'arr') {
-      return { ...state, array: action.payload.array };
+      return { ...state, array: action.payload };
     } else if (action.type === 'nmiTom') {
       newValue = action.payload.value * 1852;
     } else if (action.type === 'mTonmi') {
@@ -84,11 +84,12 @@ export function lengthReducer(state, action) {
 }
 
 export function areaReducer(state, action) {
-  const conversionCases = generateConversionCases(areas);
+  const conversionCases = generateConversionCases(state.array);
   if (action.type in conversionCases) {
     let newValue;
-
-    if (action.type === 'tatamiTomm2') {
+    if (action.type === 'arr') {
+      return { ...state, array: action.payload };
+    } else if (action.type === 'tatamiTomm2') {
       newValue = action.payload.value * 1620; // Convert to Square Millimeter (mm²)
     } else if (action.type === 'mm2Totatami') {
       newValue = action.payload.value / 1620; // Convert from Square Millimeter (mm²) to Tatami Mat
@@ -143,25 +144,32 @@ export function areaReducer(state, action) {
 }
 
 export function volumeReducer(state, action) {
-  const conversionCases = generateConversionCases(volumes);
+  const conversionCases = generateConversionCases(state.array);
   if (action.type in conversionCases) {
-    const newValue = convertUnit(
-      action.payload.value,
-      action.payload.fromUnit,
-      action.payload.toUnit
-    );
-    return {
-      ...state,
-      converted: newValue,
-    };
+    if (action.type === 'arr') {
+      return { ...state, array: action.payload };
+    } else {
+      const newValue = convertUnit(
+        action.payload.value,
+        action.payload.fromUnit,
+        action.payload.toUnit
+      );
+      return {
+        ...state,
+        converted: newValue,
+      };
+    }
   }
   return state;
 }
 
 export function weightReducer(state, action) {
-  const conversionCases = generateConversionCases(weights);
+  const conversionCases = generateConversionCases(state.array);
   if (action.type in conversionCases) {
     let newValue;
+    if (action.type === 'arr') {
+      return { ...state, array: action.payload };
+    }
     if (action.type === 'cup-us-sugarTog') {
       newValue = action.payload.value * 200;
     } else if (action.type === 'cup-us-sugarTolb') {

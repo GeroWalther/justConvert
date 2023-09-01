@@ -9,11 +9,11 @@ import { useProSub } from './context/ctx';
 
 const pattern = /^[0-9]*$/;
 
-const initialState = {
-  converted: 0,
-};
-
 const WeightConvert = () => {
+  const initialState = {
+    converted: 0,
+    array: proMember ? weightsPro : weights,
+  };
   const { proMember } = useProSub();
   const [{ converted }, dispatch] = useReducer(weightReducer, initialState);
   const [fromVal, setFromVal] = useState('kg');
@@ -27,6 +27,12 @@ const WeightConvert = () => {
   useEffect(() => {
     convertHandler();
   }, [converted, fromVal, toVal]);
+
+  useEffect(() => {
+    proMember
+      ? dispatch({ type: 'arr', payload: weightsPro })
+      : dispatch({ type: 'arr', payload: weights });
+  }, [proMember]);
 
   useEffect(() => {
     const itemExists = items.some(
