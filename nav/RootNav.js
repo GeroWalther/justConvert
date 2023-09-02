@@ -2,26 +2,25 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNav from './TabNavigator';
 import SubsriptionModalScreen from '../screens/SubsriptionModalScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
 const RootStack = createNativeStackNavigator();
 
 const RootNav = () => {
   return (
-    <RootStack.Navigator>
-      <RootStack.Group>
+    <NavigationContainer>
+      <RootStack.Navigator>
         <RootStack.Screen name='Main' component={TabNav} />
-      </RootStack.Group>
-      <RootStack.Group
-        screenOptions={{
-          presentation: 'modal',
-        }}>
         <RootStack.Screen
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            presentation: 'containedModal',
+          }}
           name='SubModal'
           component={SubsriptionModalScreen}
         />
-      </RootStack.Group>
-    </RootStack.Navigator>
+      </RootStack.Navigator>
+    </NavigationContainer>
   );
 };
 

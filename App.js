@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
 import { ProProvider } from './components/context/ctx';
 import RootNav from './nav/RootNav';
-import { NavigationContainer } from '@react-navigation/native';
+
 //import Purchases from 'react-native-purchases';
 
 const queryClient = new QueryClient({
@@ -16,15 +16,13 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <QueryClientProvider client={queryClient}>
-        <SafeAreaView className='bg-slate-600 flex-1'>
-          <ProProvider>
-            <RootNav />
-          </ProProvider>
-          <StatusBar style='light' />
-        </SafeAreaView>
-      </QueryClientProvider>
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaView className='bg-slate-600 flex-1'>
+        <ProProvider>
+          <RootNav />
+        </ProProvider>
+        <StatusBar style='light' />
+      </SafeAreaView>
+    </QueryClientProvider>
   );
 }

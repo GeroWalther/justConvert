@@ -12,10 +12,10 @@ function CloseBtn({ onClose, children }) {
     </Pressable>
   );
 }
-const Btn = ({ children = 'Convert', onPress }) => {
+export const ActionBtn = ({ children, onPress }) => {
   return (
     <Pressable className='bg-teal-500 rounded-xl px-5 py-2' onPress={onPress}>
-      <Text className='text-slate-50 text-center font-semibold text-lg '>
+      <Text className='text-slate-50 text-center font-semibold text-lg'>
         {children}
       </Text>
     </Pressable>
@@ -68,13 +68,13 @@ const ProMemberModal = ({ onClose, isVisible }) => {
             </Text>
 
             <View className='flex-row justify-around mt-6'>
-              <Btn
+              <ActionBtn
                 onPress={() => {
-                  console.log('clicked nav');
+                  onClose();
                   navigation.navigate('SubModal');
                 }}>
                 Upgrade Now
-              </Btn>
+              </ActionBtn>
               <CloseBtn onClose={onClose}>Not for now</CloseBtn>
             </View>
           </View>
