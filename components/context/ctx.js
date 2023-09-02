@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from 'react';
 const ProCtx = createContext();
 
 function ProProvider({ children }) {
-  const [proMember, setProMenber] = useState(true);
+  const [proMember, setProMenber] = useState(false);
 
   return (
     <ProCtx.Provider value={{ proMember, setProMenber }}>
