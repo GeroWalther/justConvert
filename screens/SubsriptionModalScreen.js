@@ -57,7 +57,6 @@ const SubsriptionModalScreen = ({ navigation }) => {
         typeof purchaseMade.purchaserInfo.entitlements.active.pro !==
         'undefined'
       ) {
-        setProMenber(true);
         navigation.goBack();
       }
     } catch (e) {
