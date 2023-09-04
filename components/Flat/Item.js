@@ -15,9 +15,12 @@ export default function Item({
       <View className='flex-row py-1'>
         <Text className='text-slate-200 font-semibold'>
           {formatNumber(input)}
-          {fromVal} to{' '}
-          {toVal.replace(/-us-/g, ' ').replace(/2/g, '²').replace(/3/g, '³')} ={' '}
-          {formatNumber(converted)}
+          {fromVal
+            .replace(/-us-/g, ' ')
+            .replace(/2/g, '²')
+            .replace(/3/g, '³')}{' '}
+          to {toVal.replace(/-us-/g, ' ').replace(/2/g, '²').replace(/3/g, '³')}{' '}
+          = {formatNumber(converted)}
           {toVal.replace(/-us-/g, ' ').replace(/2/g, '²').replace(/3/g, '³')}
         </Text>
       </View>

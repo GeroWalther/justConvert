@@ -11,9 +11,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#475569"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.waltherandstilling.justConvert"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,6 +26,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
     }
   }
 }
