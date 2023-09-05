@@ -5,6 +5,7 @@ import Logo from '../components/logo/Logo';
 import ProMemberModal from '../components/ui/ProMemberModal.js';
 import { checkUserMembership } from '../services/lib/commonFunctions';
 import Purchases from 'react-native-purchases';
+import { useProSub } from '../components/context/ctx';
 
 const AreaConvertScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

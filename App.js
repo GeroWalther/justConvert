@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native';
 import { ProProvider } from './components/context/ctx';
 import RootNav from './nav/RootNav';
 
-//import Purchases from 'react-native-purchases';
+import Purchases from 'react-native-purchases';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,18 +15,18 @@ const queryClient = new QueryClient({
   },
 });
 
-// const IOS_REVCAT_KEY = 'appl_IdXjoLTYMEwWUxxFnmQHIcCvKOO';
-// const ANDROID_REVCAT_KEY = '';
+const IOS_REVCAT_KEY = 'appl_IdXjoLTYMEwWUxxFnmQHIcCvKOO';
+const ANDROID_REVCAT_KEY = '';
 
 export default function App() {
-  //   useEffect(() => {
-  //     Purchases.setup();
-  //     if (Platform.OS === 'ios') {
-  //       Purchases.setup(IOS_REVCAT_KEY);
-  //     } else if (Platform.OS === 'android') {
-  //       Purchases.setup(ANDROID_REVCAT_KEY);
-  //     }
-  //   }, []);
+  useEffect(() => {
+    Purchases.setup();
+    if (Platform.OS === 'ios') {
+      Purchases.setup(IOS_REVCAT_KEY);
+    } else if (Platform.OS === 'android') {
+      Purchases.setup(ANDROID_REVCAT_KEY);
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { ActionBtn } from '../components/ui/ProMemberModal.js';
 import { useProSub } from '../components/context/ctx.js';
-//import Purchases from 'react-native-purchases';
+import Purchases from 'react-native-purchases';
 
 function CloseBtn({ onClose }) {
   return (
