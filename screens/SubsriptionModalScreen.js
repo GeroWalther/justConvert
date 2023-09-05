@@ -32,7 +32,7 @@ function Card({ price = '$2.99', period = 'monthly', trial, onPress }) {
 }
 
 const SubsriptionModalScreen = ({ navigation }) => {
-  const { setProMenber } = useProSub();
+  const { setProMember } = useProSub();
   const [offer, setOffer] = useState(null);
   const fetchOfferings = async () => {
     try {
@@ -57,6 +57,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
         typeof purchaseMade.purchaserInfo.entitlements.active.pro !==
         'undefined'
       ) {
+        setProMember(true);
         navigation.goBack();
       }
     } catch (e) {

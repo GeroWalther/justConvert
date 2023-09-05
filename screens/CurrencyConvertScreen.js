@@ -1,32 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import Purchases from 'react-native-purchases';
 import { useProSub } from '../components/context/ctx';
 import CurrConvert from '../components/CurrConvert';
 import Logo from '../components/logo/Logo';
-//import ProMemberModal from '../components/ui/ProMemberModal.js';
+import ProMemberModal from '../components/ui/ProMemberModal.js';
+import Purchases from 'react-native-purchases';
+import { checkUserMembership } from '../services/lib/commonFunctions';
 
 const CurrencyConvertScreen = () => {
-  const { proMember, setProMenber } = useProSub();
+  const { proMember, setProMember } = useProSub();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    ckeckUserMembership();
+    checkUserMembership();
     Purchases.addPurchaserInfoUpdateListener((info) => {
-      checkUserMembership();
+      checkUserMembership(setProMember);
     });
   }, []);
-
-  checkUserMembership = async () => {
-    try {
-      const purchaserInfo = await Purchases.getPurchaserInfo();
-      if (typeof purchaserInfo.entitlements.active.pro !== 'undefined') {
-        setProMenber(true);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     if (!proMember) {

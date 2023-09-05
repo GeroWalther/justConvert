@@ -6,6 +6,13 @@ import ProMemberModal from '../components/ui/ProMemberModal.js';
 
 const LengthConvertScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { setProMember } = useProSub();
+  useEffect(() => {
+    checkUserMembership();
+    Purchases.addPurchaserInfoUpdateListener((info) => {
+      checkUserMembership(setProMember);
+    });
+  }, []);
   function handleModalClose() {
     setIsModalVisible(false);
   }
