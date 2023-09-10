@@ -29,7 +29,8 @@ yarn-error.*
 
 # local env files
 .env*.local
-credentials
+# Exclude the credentials.js file
+credentials.js
 
 # typescript
 *.tsbuildinfo

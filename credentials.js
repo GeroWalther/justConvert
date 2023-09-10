@@ -1,2 +1,0 @@
-export const EXPO_PUBLIC_IOS_REVCAT_KEY = 'appl_IdXjoLTYMEwWUxxFnmQHIcCvKOO';
-export const EXPO_PUBLIC_ANDROID_REVCAT_KEY = '';
