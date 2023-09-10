@@ -1,6 +1,10 @@
 import { Platform } from 'react-native';
 import Purchases from 'react-native-purchases';
 import { useState, useEffect } from 'react';
+import {
+  EXPO_PUBLIC_IOS_REVCAT_KEY,
+  EXPO_PUBLIC_ANDROID_REVCAT_KEY,
+} from '../credentials';
 
 function useRevenueCat() {
   const [currentOffering, setCurrentOffering] = useState(null);
@@ -12,11 +16,11 @@ function useRevenueCat() {
       // Purchases.setDebugEnabled(true);
       if (Platform === 'android') {
         await Purchases.configure({
-          apiKey: process.env.EXPO_PUBLIC_ANDROID_REVCAT_KEY,
+          apiKey: EXPO_PUBLIC_ANDROID_REVCAT_KEY,
         });
       } else {
         await Purchases.configure({
-          apiKey: 'appl_IdXjoLTYMEwWUxxFnmQHIcCvKOO',
+          apiKey: EXPO_PUBLIC_IOS_REVCAT_KEY,
         });
       }
       const offerings = await Purchases.getOfferings();
