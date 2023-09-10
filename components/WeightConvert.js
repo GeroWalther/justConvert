@@ -5,15 +5,15 @@ import { weights, weightsPro } from '../constants';
 import { weightReducer } from '../services/lib/commonReducers';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
-import { useProSub } from './context/ctx';
+import useRevenueCat from '../hooks/useRevenueCat';
 
 const pattern = /^[0-9]*$/;
 
 const WeightConvert = () => {
-  const { proMember } = useProSub();
+  const { isProMember } = useRevenueCat();
   const initialState = {
     converted: 0,
-    array: proMember ? weightsPro : weights,
+    array: isProMember ? weightsPro : weights,
   };
   const [{ converted }, dispatch] = useReducer(weightReducer, initialState);
   const [fromVal, setFromVal] = useState('kg');
@@ -29,10 +29,10 @@ const WeightConvert = () => {
   }, [converted, fromVal, toVal]);
 
   useEffect(() => {
-    proMember
+    isProMember
       ? dispatch({ type: 'arr', payload: weightsPro })
       : dispatch({ type: 'arr', payload: weights });
-  }, [proMember]);
+  }, [isProMember]);
 
   useEffect(() => {
     const itemExists = items.some(
@@ -146,7 +146,7 @@ const WeightConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={proMember ? weightsPro : weights}
+        items1={isProMember ? weightsPro : weights}
         items2={filteredAvailable}
         switchHandler={switchHandler}
         error2={error}

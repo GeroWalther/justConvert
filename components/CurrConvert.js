@@ -5,10 +5,10 @@ import { currencies, currenciesPro } from '../constants';
 import { useCurrConvert } from '../hooks/useCurrConvert';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
-import { useProSub } from './context/ctx';
+import useRevenueCat from '../hooks/useRevenueCat';
 
 const ConvertComp = () => {
-  const { proMember } = useProSub();
+  const { isProMember } = useRevenueCat();
 
   const [text, setText] = useState('1');
   const [amount, setAmount] = useState(1);
@@ -113,8 +113,8 @@ const ConvertComp = () => {
         setToVal={setToCur}
         setFromVal={setFromCur}
         setInput={setText}
-        items1={proMember ? currenciesPro : currencies}
-        items2={proMember ? currenciesPro : currencies}
+        items1={isProMember ? currenciesPro : currencies}
+        items2={isProMember ? currenciesPro : currencies}
         isLoading={isLoading}
         error={error}
       />

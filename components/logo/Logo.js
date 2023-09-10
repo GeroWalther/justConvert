@@ -2,10 +2,10 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useFonts } from 'expo-font';
 import SubBtn from '../Btn/SubBtn';
-import { useProSub } from '../context/ctx';
+import useRevenueCat from '../../hooks/useRevenueCat';
 
 const Logo = ({ setModal }) => {
-  const { proMember } = useProSub();
+  const { isProMember } = useRevenueCat();
   const [fontsLoaded] = useFonts({
     Monoton: require('../../assets/fonts/Monoton-Regular.ttf'),
   });
@@ -15,7 +15,7 @@ const Logo = ({ setModal }) => {
   return (
     <View style={styles.con} className='flex-row justify-around'>
       <Text style={styles.LogoTxt}>justConvert</Text>
-      {!proMember && <SubBtn onPress={() => setModal(true)} />}
+      {!isProMember && <SubBtn onPress={() => setModal(true)} />}
     </View>
   );
 };

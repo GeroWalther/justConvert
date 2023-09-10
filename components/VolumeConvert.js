@@ -5,15 +5,16 @@ import { volumes, volumesPro } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { volumeReducer } from '../services/lib/commonReducers';
-import { useProSub } from './context/ctx';
+
+import useRevenueCat from '../hooks/useRevenueCat';
 
 const pattern = /^[0-9]*$/;
 
 const VolumeConvert = () => {
-  const { proMember } = useProSub();
+  const { isProMember } = useRevenueCat();
   const initialState = {
     converted: 0,
-    array: proMember ? volumesPro : volumes,
+    array: isProMember ? volumesPro : volumes,
   };
   const [{ converted }, dispatch] = useReducer(volumeReducer, initialState);
   const [fromVal, setFromVal] = useState('ml');
@@ -28,10 +29,10 @@ const VolumeConvert = () => {
   }, [converted, fromVal, toVal]);
 
   useEffect(() => {
-    proMember
+    isProMember
       ? dispatch({ type: 'arr', payload: volumesPro })
       : dispatch({ type: 'arr', payload: volumes });
-  }, [proMember]);
+  }, [isProMember]);
 
   useEffect(() => {
     const itemExists = items.some(
@@ -138,8 +139,8 @@ const VolumeConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={proMember ? volumesPro : volumes}
-        items2={proMember ? volumesPro : volumes}
+        items1={isProMember ? volumesPro : volumes}
+        items2={isProMember ? volumesPro : volumes}
         switchHandler={switchHandler}
         error2={error}
       />

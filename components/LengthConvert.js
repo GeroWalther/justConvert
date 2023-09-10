@@ -5,14 +5,15 @@ import { lengths, lengthsPro } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { lengthReducer } from '../services/lib/commonReducers';
-import { useProSub } from './context/ctx';
+
+import useRevenueCat from '../hooks/useRevenueCat';
 const pattern = /^[0-9]*$/;
 
 const LengthConvert = () => {
-  const { proMember } = useProSub();
+  const { isProMember } = useRevenueCat();
   const initialState = {
     converted: 0,
-    array: proMember ? lengthsPro : lengths,
+    array: isProMember ? lengthsPro : lengths,
   };
   const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);
   const [fromVal, setFromVal] = useState('in');
@@ -28,10 +29,10 @@ const LengthConvert = () => {
   }, [converted, fromVal, toVal]);
 
   useEffect(() => {
-    proMember
+    isProMember
       ? dispatch({ type: 'arr', payload: lengthsPro })
       : dispatch({ type: 'arr', payload: lengths });
-  }, [proMember]);
+  }, [isProMember]);
 
   useEffect(() => {
     const itemExists = items.some(
@@ -139,8 +140,8 @@ const LengthConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={proMember ? lengthsPro : lengths}
-        items2={proMember ? lengthsPro : lengths}
+        items1={isProMember ? lengthsPro : lengths}
+        items2={isProMember ? lengthsPro : lengths}
         switchHandler={switchHandler}
         error2={error}
       />

@@ -1,36 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import { useProSub } from '../components/context/ctx';
 import CurrConvert from '../components/CurrConvert';
 import Logo from '../components/logo/Logo';
 import ProMemberModal from '../components/ui/ProMemberModal.js';
-import Purchases from 'react-native-purchases';
-import { checkUserMembership } from '../services/lib/commonFunctions';
+
+import useRevenueCat from '../hooks/useRevenueCat';
 
 const CurrencyConvertScreen = () => {
-  const { proMember, setProMember } = useProSub();
+  const { isProMember } = useRevenueCat();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    checkUserMembership();
-    Purchases.addPurchaserInfoUpdateListener((info) => {
-      checkUserMembership(setProMember);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!proMember) {
+    if (!isProMember) {
       setIsModalVisible(true);
     } else {
       setIsModalVisible(false);
     }
-  }, [proMember]);
+  }, [isProMember]);
   function handleModalClose() {
     setIsModalVisible(false);
   }
   return (
     <View className='bg-slate-600 flex-1'>
-      {!proMember && (
+      {!isProMember && (
         <ProMemberModal isVisible={isModalVisible} onClose={handleModalClose} />
       )}
       <Logo setModal={setIsModalVisible} />

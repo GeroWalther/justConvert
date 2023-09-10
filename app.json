@@ -11,12 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#475569"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.waltherandstilling.justConvert"
+      "bundleIdentifier": "com.waltherandstilling.justConvert",
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {

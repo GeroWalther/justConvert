@@ -5,15 +5,15 @@ import { areas, areasPro } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { areaReducer } from '../services/lib/commonReducers';
-import { useProSub } from './context/ctx';
+import useRevenueCat from '../hooks/useRevenueCat';
 
 const pattern = /^[0-9]*$/;
 
 const AreaConvert = () => {
-  const { proMember } = useProSub();
+  const { isProMember } = useRevenueCat();
   const initialState = {
     converted: 0,
-    array: proMember ? areasPro : areas,
+    array: isProMember ? areasPro : areas,
   };
   const [{ converted }, dispatch] = useReducer(areaReducer, initialState);
   const [fromVal, setFromVal] = useState('m2');
@@ -28,10 +28,10 @@ const AreaConvert = () => {
   }, [converted, fromVal, toVal]);
 
   useEffect(() => {
-    proMember
+    isProMember
       ? dispatch({ type: 'arr', payload: areasPro })
       : dispatch({ type: 'arr', payload: areas });
-  }, [proMember]);
+  }, [isProMember]);
 
   useEffect(() => {
     const itemExists = items.some(
@@ -138,8 +138,8 @@ const AreaConvert = () => {
         setToVal={setToVal}
         setFromVal={setFromVal}
         setInput={setInput}
-        items1={proMember ? areasPro : areas}
-        items2={proMember ? areasPro : areas}
+        items1={isProMember ? areasPro : areas}
+        items2={isProMember ? areasPro : areas}
         switchHandler={switchHandler}
         error2={error}
       />
