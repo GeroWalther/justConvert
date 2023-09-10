@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { ActionBtn } from '../components/ui/ProMemberModal.js';
+import Purchases from 'react-native-purchases';
 import useRevenueCat from '../hooks/useRevenueCat';
 
 function CloseBtn({ onClose }) {
@@ -19,11 +20,12 @@ function CloseBtn({ onClose }) {
     </Pressable>
   );
 }
-function Card({ price = '$2.99', period = 'monthly', trial, onPress }) {
+function Card({ title, price = '$2.99', period = 'monthly', trial, onPress }) {
   return (
     <View className='bg-slate-500 px-7 py-5 mb-8 rounded-lg items-center'>
-      <Text className='text-base text-slate-200 p-3'>
-        {period} {price} {trial}
+      <Text className='uppercase text-slate-200 text-lg'>{title}</Text>
+      <Text className='text-base text-slate-200 p-3 text-center'>
+        <Text className='font-bold'>{price}</Text> / {period} {trial}
       </Text>
       <ActionBtn onPress={onPress}>Subscribe & Pay</ActionBtn>
     </View>
@@ -50,6 +52,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
     if (type === 'MONTHLY') return 'monthly';
     else if (type === 'ANNUAL') return 'yearly';
   };
+  console.log(currentOffering?.availablePackages);
   return (
     <ScrollView className='bg-slate-700'>
       <CloseBtn onClose={() => navigation.goBack()} />
@@ -64,7 +67,8 @@ const SubsriptionModalScreen = ({ navigation }) => {
             currentOffering.availablePackages.map((pk) => (
               <Card
                 key={pk.identifier}
-                price={pk.product.price_string}
+                title={pk.product.title}
+                price={pk.product.priceString}
                 period={getPkTypeString(pk.packageType)}
                 trial={
                   pk.product.introPrice &&

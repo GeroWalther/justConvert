@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 function useRevenueCat() {
   const [currentOffering, setCurrentOffering] = useState(null);
   const [customerInfo, setCustomerInfo] = useState(null);
-  const isProMember = customerInfo?.activeSubscriptions.includes('pro');
+  const isProMember = customerInfo?.activeSubscriptions;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,25 +20,27 @@ function useRevenueCat() {
         });
       }
       const offerings = await Purchases.getOfferings();
-      console.log('OFERINGS: ', offerings);
       const customerInfo = await Purchases.getCustomerInfo();
-      console.log('CUSTOMERINFO: ', customerInfo);
+      // console.log('CUSTOMERINFO: ', customerInfo);
 
-      if (offerings.current !== null) {
-        setCurrentOffering(offerings.current);
-      }
+      setCurrentOffering(offerings.current);
+
       setCustomerInfo(customerInfo);
     };
+    // console.log('OFERINGS: ', currentOffering);
 
     fetchData().catch(console.error);
   }, []);
 
   useEffect(() => {
-    const customerInfoUpdated = async (purchaserInfo) => {
-      setCustomerInfo(purchaserInfo);
-    };
-    Purchases.addCustomerInfoUpdateListener(customerInfoUpdated);
-  }, []);
+    if (customerInfo?.activeSubscriptions) {
+      const customerInfoUpdated = async (purchaserInfo) => {
+        setCustomerInfo(purchaserInfo);
+      };
+      Purchases.addCustomerInfoUpdateListener(customerInfoUpdated);
+    }
+  }, [customerInfo]);
+
   return { currentOffering, customerInfo, isProMember };
 }
 export default useRevenueCat;
