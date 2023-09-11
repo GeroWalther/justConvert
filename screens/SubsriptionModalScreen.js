@@ -33,7 +33,7 @@ function Card({ title, price = '$2.99', period = 'monthly', trial, onPress }) {
 }
 
 const SubsriptionModalScreen = ({ navigation }) => {
-  const { currentOffering } = useRevenueCat();
+  const { currentOffering, isOfferingLoading } = useRevenueCat();
 
   async function payNsubcribe(pk) {
     try {
@@ -52,7 +52,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
     if (type === 'MONTHLY') return 'monthly';
     else if (type === 'ANNUAL') return 'yearly';
   };
-  console.log(currentOffering?.availablePackages);
+  // console.log(currentOffering?.availablePackages);
   return (
     <ScrollView className='bg-slate-700'>
       <CloseBtn onClose={() => navigation.goBack()} />
@@ -61,7 +61,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
           <Text className='text-4xl text-center text-slate-200 mb-10'>
             Subscribe and get full access to all features
           </Text>
-          {!currentOffering ? (
+          {isOfferingLoading ? (
             <ActivityIndicator />
           ) : (
             currentOffering.availablePackages.map((pk) => (

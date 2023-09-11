@@ -1,50 +1,105 @@
+// import { Platform } from 'react-native';
+// import Purchases from 'react-native-purchases';
+// import { useState, useEffect } from 'react';
+// import {
+//   EXPO_PUBLIC_IOS_REVCAT_KEY,
+//   EXPO_PUBLIC_ANDROID_REVCAT_KEY,
+// } from '../credentials';
+
+// function useRevenueCat() {
+//   const [currentOffering, setCurrentOffering] = useState(null);
+//   const [customerInfo, setCustomerInfo] = useState(null);
+//   const isProMember = customerInfo?.activeSubscriptions;
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       // Purchases.setDebugEnabled(true);
+//       if (Platform === 'android') {
+//         await Purchases.configure({
+//           apiKey: EXPO_PUBLIC_ANDROID_REVCAT_KEY,
+//         });
+//       } else {
+//         await Purchases.configure({
+//           apiKey: EXPO_PUBLIC_IOS_REVCAT_KEY,
+//         });
+//       }
+//       const offerings = await Purchases.getOfferings();
+//       const customerInfo = await Purchases.getCustomerInfo();
+//       // console.log('CUSTOMERINFO: ', customerInfo);
+
+//       setCurrentOffering(offerings.current);
+
+//       setCustomerInfo(customerInfo);
+//     };
+//     // console.log('OFERINGS: ', currentOffering);
+
+//     fetchData().catch(console.error);
+//   }, []);
+
+//   useEffect(() => {
+//     if (customerInfo?.activeSubscriptions) {
+//       const customerInfoUpdated = async (purchaserInfo) => {
+//         setCustomerInfo(purchaserInfo);
+//       };
+//       Purchases.addCustomerInfoUpdateListener(customerInfoUpdated);
+//     }
+//   }, [customerInfo]);
+
+//   return { currentOffering, customerInfo, isProMember };
+// }
+// export default useRevenueCat;
+
 import { Platform } from 'react-native';
 import Purchases from 'react-native-purchases';
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import {
   EXPO_PUBLIC_IOS_REVCAT_KEY,
   EXPO_PUBLIC_ANDROID_REVCAT_KEY,
 } from '../credentials';
 
 function useRevenueCat() {
-  const [currentOffering, setCurrentOffering] = useState(null);
-  const [customerInfo, setCustomerInfo] = useState(null);
+  const {
+    data: currentOffering,
+    error: offeringError,
+    isLoading: isOfferingLoading,
+  } = useQuery(['currentOffering'], fetchCurrentOffering);
+
+  const {
+    data: customerInfo,
+    error: customerInfoError,
+    isLoading: isCustomerInfoLoading,
+  } = useQuery(['customerInfo'], fetchCustomerInfo);
+
   const isProMember = customerInfo?.activeSubscriptions;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // Purchases.setDebugEnabled(true);
-      if (Platform === 'android') {
-        await Purchases.configure({
-          apiKey: EXPO_PUBLIC_ANDROID_REVCAT_KEY,
-        });
-      } else {
-        await Purchases.configure({
-          apiKey: EXPO_PUBLIC_IOS_REVCAT_KEY,
-        });
-      }
-      const offerings = await Purchases.getOfferings();
-      const customerInfo = await Purchases.getCustomerInfo();
-      // console.log('CUSTOMERINFO: ', customerInfo);
-
-      setCurrentOffering(offerings.current);
-
-      setCustomerInfo(customerInfo);
-    };
-    // console.log('OFERINGS: ', currentOffering);
-
-    fetchData().catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    if (customerInfo?.activeSubscriptions) {
-      const customerInfoUpdated = async (purchaserInfo) => {
-        setCustomerInfo(purchaserInfo);
-      };
-      Purchases.addCustomerInfoUpdateListener(customerInfoUpdated);
+  async function fetchCurrentOffering() {
+    if (Platform.OS === 'android') {
+      await Purchases.configure({
+        apiKey: EXPO_PUBLIC_ANDROID_REVCAT_KEY,
+      });
+    } else {
+      await Purchases.configure({
+        apiKey: EXPO_PUBLIC_IOS_REVCAT_KEY,
+      });
     }
-  }, [customerInfo]);
 
-  return { currentOffering, customerInfo, isProMember };
+    const offerings = await Purchases.getOfferings();
+    return offerings.current;
+  }
+
+  async function fetchCustomerInfo() {
+    const customerInfo = await Purchases.getCustomerInfo();
+    return customerInfo;
+  }
+
+  return {
+    currentOffering,
+    customerInfo,
+    isProMember,
+    offeringError,
+    customerInfoError,
+    isOfferingLoading,
+    isCustomerInfoLoading,
+  };
 }
 export default useRevenueCat;
