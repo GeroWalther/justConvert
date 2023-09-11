@@ -1,3 +1,6 @@
+export const pattern = /^[0-9]*$/;
+export const INIT_VALUE = 0;
+
 export const currencies = [
   { label: 'USD', value: 'USD' },
   { label: 'EUR', value: 'EUR' },

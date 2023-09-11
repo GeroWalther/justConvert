@@ -1,18 +1,17 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Keyboard, Alert } from 'react-native';
-import { lengths, lengthsPro } from '../constants';
+import { INIT_VALUE, lengths, lengthsPro, pattern } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { lengthReducer } from '../services/lib/commonReducers';
 
 import useRevenueCat from '../hooks/useRevenueCat';
-const pattern = /^[0-9]*$/;
 
 const LengthConvert = () => {
   const { isProMember } = useRevenueCat();
   const initialState = {
-    converted: 0,
+    converted: INIT_VALUE,
     array: isProMember ? lengthsPro : lengths,
   };
   const [{ converted }, dispatch] = useReducer(lengthReducer, initialState);

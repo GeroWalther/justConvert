@@ -1,18 +1,16 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Keyboard, Alert } from 'react-native';
-import { areas, areasPro } from '../constants';
+import { areas, areasPro, INIT_VALUE, pattern } from '../constants';
 import ConvertLayout from './ui/ConvertLayout';
 import HistoryLayout from './ui/HistoryLayout';
 import { areaReducer } from '../services/lib/commonReducers';
 import useRevenueCat from '../hooks/useRevenueCat';
 
-const pattern = /^[0-9]*$/;
-
 const AreaConvert = () => {
   const { isProMember } = useRevenueCat();
   const initialState = {
-    converted: 0,
+    converted: INIT_VALUE,
     array: isProMember ? areasPro : areas,
   };
   const [{ converted }, dispatch] = useReducer(areaReducer, initialState);

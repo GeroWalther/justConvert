@@ -4,6 +4,7 @@ import ClearBtn from '../Btn/ClearBtn';
 import Item from '../Flat/Item';
 
 export default function HistoryLayout({ items, clearAll }) {
+  console.log(items);
   if (items.length === 0) return null;
   const screenHeight = Dimensions.get('window').height;
   const marginTop = screenHeight <= 667 ? '35%' : '20%';
