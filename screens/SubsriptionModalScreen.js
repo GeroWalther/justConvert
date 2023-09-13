@@ -5,11 +5,12 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { ActionBtn } from '../components/ui/ProMemberModal.js';
 import Purchases from 'react-native-purchases';
 import useRevenueCat from '../hooks/useRevenueCat';
+import { set } from 'date-fns';
 
 function CloseBtn({ onClose }) {
   return (
@@ -34,10 +35,13 @@ function Card({ title, price = '$2.99', period = 'monthly', trial, onPress }) {
 
 const SubsriptionModalScreen = ({ navigation }) => {
   const { currentOffering, isOfferingLoading } = useRevenueCat();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function payNsubcribe(pk) {
     try {
+      setIsLoading(true);
       const purchaserInfo = await Purchases.purchasePackage(pk);
+
       if (purchaserInfo.customerInfo.entitlements.active.pro) {
         navigation.goBack();
       }
@@ -45,6 +49,8 @@ const SubsriptionModalScreen = ({ navigation }) => {
       if (!e.userCancelled) {
         console.log(e);
       }
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -56,12 +62,13 @@ const SubsriptionModalScreen = ({ navigation }) => {
   return (
     <ScrollView className='bg-slate-700'>
       <CloseBtn onClose={() => navigation.goBack()} />
+
       <View className='items-center'>
         <View className='items-center justify-between px-3 py-4'>
           <Text className='text-4xl text-center text-slate-200 mb-10'>
             Subscribe and get full access to all features
           </Text>
-          {isOfferingLoading ? (
+          {isOfferingLoading || isLoading ? (
             <ActivityIndicator />
           ) : (
             currentOffering.availablePackages.map((pk) => (

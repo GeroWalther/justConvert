@@ -1,34 +1,34 @@
 import { Platform } from 'react-native';
 import Purchases from 'react-native-purchases';
-import { useQuery } from '@tanstack/react-query';
-import {
-  EXPO_PUBLIC_IOS_REVCAT_KEY,
-  EXPO_PUBLIC_ANDROID_REVCAT_KEY,
-} from '../credentials';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 function useRevenueCat() {
-  const {
-    data: currentOffering,
-    error: offeringError,
-    isLoading: isOfferingLoading,
-  } = useQuery(['currentOffering'], fetchCurrentOffering);
+  const queryClient = useQueryClient();
 
-  const {
-    data: customerInfo,
-    error: customerInfoError,
-    isLoading: isCustomerInfoLoading,
-  } = useQuery(['customerInfo'], fetchCustomerInfo);
+  queryClient.invalidateQueries({ queryKey: ['customerInfo'] });
 
-  const isProMember = customerInfo?.activeSubscriptions;
+  const { data: currentOffering, isLoading: isOfferingLoading } = useQuery(
+    ['currentOffering'],
+    fetchCurrentOffering
+  );
+
+  const { data: customerInfo, isLoading: isCustomerInfoLoading } = useQuery(
+    ['customerInfo'],
+    fetchCustomerInfo
+  );
+
+  const isProMember =
+    Array.isArray(customerInfo?.activeSubscriptions) &&
+    customerInfo?.activeSubscriptions.length > 0;
 
   async function fetchCurrentOffering() {
     if (Platform.OS === 'android') {
       await Purchases.configure({
-        apiKey: EXPO_PUBLIC_ANDROID_REVCAT_KEY,
+        apiKey: process.env.EXPO_PUBLIC_ANDROID_REVCAT_KEY,
       });
     } else {
       await Purchases.configure({
-        apiKey: EXPO_PUBLIC_IOS_REVCAT_KEY,
+        apiKey: 'appl_IdXjoLTYMEwWUxxFnmQHIcCvKOO',
       });
     }
 
@@ -45,8 +45,6 @@ function useRevenueCat() {
     currentOffering,
     customerInfo,
     isProMember,
-    offeringError,
-    customerInfoError,
     isOfferingLoading,
     isCustomerInfoLoading,
   };
