@@ -10,7 +10,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { ActionBtn } from '../components/ui/ProMemberModal.js';
 import Purchases from 'react-native-purchases';
 import useRevenueCat from '../hooks/useRevenueCat';
-import { set } from 'date-fns';
 
 function CloseBtn({ onClose }) {
   return (
@@ -34,7 +33,8 @@ function Card({ title, price = '$2.99', period = 'monthly', trial, onPress }) {
 }
 
 const SubsriptionModalScreen = ({ navigation }) => {
-  const { currentOffering, isOfferingLoading } = useRevenueCat();
+  const { currentOffering, isOfferingLoading, changeSubStatus } =
+    useRevenueCat();
   const [isLoading, setIsLoading] = useState(false);
 
   async function payNsubcribe(pk) {
@@ -51,6 +51,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
       }
     } finally {
       setIsLoading(false);
+      changeSubStatus();
     }
   }
 

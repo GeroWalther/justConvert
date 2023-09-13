@@ -5,7 +5,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 function useRevenueCat() {
   const queryClient = useQueryClient();
 
-  queryClient.invalidateQueries({ queryKey: ['customerInfo'] });
+  const changeSubStatus = () => {
+    queryClient.invalidateQueries({ queryKey: ['customerInfo'] });
+  };
 
   const { data: currentOffering, isLoading: isOfferingLoading } = useQuery(
     ['currentOffering'],
@@ -47,6 +49,7 @@ function useRevenueCat() {
     isProMember,
     isOfferingLoading,
     isCustomerInfoLoading,
+    changeSubStatus,
   };
 }
 export default useRevenueCat;
