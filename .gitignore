@@ -28,6 +28,7 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
 # Exclude the credentials.js file
 credentials.js
