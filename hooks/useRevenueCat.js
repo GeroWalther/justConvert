@@ -19,9 +19,7 @@ function useRevenueCat() {
     fetchCustomerInfo
   );
 
-  const isProMember =
-    Array.isArray(customerInfo?.activeSubscriptions) &&
-    customerInfo?.activeSubscriptions.length > 0;
+  const isProMember = customerInfo?.entitlements.active.pro;
 
   async function fetchCurrentOffering() {
     if (Platform.OS === 'android') {

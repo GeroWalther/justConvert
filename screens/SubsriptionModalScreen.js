@@ -4,6 +4,7 @@ import {
   Text,
   Pressable,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import React, { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
@@ -55,6 +56,20 @@ const SubsriptionModalScreen = ({ navigation }) => {
     }
   }
 
+  async function restorePurchases() {
+    setIsLoading(true);
+    const purchaserInfo = await Purchases.restorePurchases();
+
+    if (purchaserInfo.activeSubscriptions.length > 0) {
+      Alert.alert('Success', 'Your purchase has been restored');
+      navigation.goBack();
+    } else {
+      Alert.alert('Error', 'No purchases to restore');
+    }
+
+    setIsLoading(false);
+  }
+
   const getPkTypeString = (type) => {
     if (type === 'MONTHLY') return 'monthly';
     else if (type === 'ANNUAL') return 'yearly';
@@ -88,10 +103,18 @@ const SubsriptionModalScreen = ({ navigation }) => {
               />
             ))
           )}
+          {isOfferingLoading || isLoading ? null : (
+            <Pressable onPress={restorePurchases}>
+              <Text className='text-orange-400 underline'>
+                Restore Purchases
+              </Text>
+            </Pressable>
+          )}
         </View>
+
         <Text className='text-sm text-slate-400 p-3 fixed'>
           * By clicking 'Subscribe & Pay' you agree to the terms our of
-          conditions and subscribe to a monthly/yearly subcription
+          conditions and subscribe to a monthly/yearly subscription
         </Text>
       </View>
     </ScrollView>
