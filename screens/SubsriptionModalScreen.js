@@ -61,10 +61,11 @@ const SubsriptionModalScreen = ({ navigation }) => {
     const purchaserInfo = await Purchases.restorePurchases();
 
     if (purchaserInfo.activeSubscriptions.length > 0) {
-      Alert.alert('Success', 'Your purchase has been restored');
-      navigation.goBack();
+      Alert.alert('Success 🎉', 'Your purchase has been restored!', [
+        { text: 'OK', onPress: () => navigation.goBack() },
+      ]);
     } else {
-      Alert.alert('Error', 'No purchases to restore');
+      Alert.alert('Error ❌', 'No purchases to restore.');
     }
 
     setIsLoading(false);
