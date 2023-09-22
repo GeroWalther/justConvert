@@ -11,7 +11,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#475569"
     },
+<<<<<<< HEAD
     "assetBundlePatterns": ["**/*"],
+=======
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+>>>>>>> master
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.waltherandstilling.justConvert",
@@ -21,7 +27,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#475569"
+<<<<<<< HEAD
       }
+=======
+      },
+      "package": "com.waltherandstilling.justConvert"
+>>>>>>> master
     },
     "web": {
       "favicon": "./assets/favicon.png"

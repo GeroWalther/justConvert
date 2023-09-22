@@ -4,13 +4,22 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+<<<<<<< HEAD
     "android": "expo start --android",
     "ios": "expo start --ios",
+=======
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+>>>>>>> master
     "web": "expo start --web"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.18.2",
+<<<<<<< HEAD
     "@react-native-picker/picker": "^2.4.10",
+=======
+    "@react-native-picker/picker": "2.4.10",
+>>>>>>> master
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
@@ -30,8 +39,14 @@
     "react-native-purchases": "^6.6.2",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
+<<<<<<< HEAD
     "expo-dev-client": "~2.4.8",
     "expo-updates": "~0.18.12"
+=======
+    "expo-dev-client": "~2.4.10",
+    "expo-updates": "~0.18.13",
+    "expo-splash-screen": "~0.20.5"
+>>>>>>> master
   },
   "overrides": {
     "react-native-picker-select": {

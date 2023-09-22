@@ -29,6 +29,7 @@ function useRevenueCat() {
     } else {
       await Purchases.configure({
         apiKey: 'appl_IdXjoLTYMEwWUxxFnmQHIcCvKOO',
+        // process.env.EXPO_PUBLIC_IOS_REVCAT_KEY,
       });
     }
 
