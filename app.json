@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "just convert",
+    "slug": "justConvert",
+    "version": "1.1.4",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#475569"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.waltherandstilling.justConvert",
+      "buildNumber": "5"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/splash.png",
+        "backgroundColor": "#475569"
+      },
+      "package": "com.waltherandstilling.justConvert"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
+    }
+  }
+}
