@@ -34,12 +34,9 @@ const LengthConvert = () => {
   }, [isProMember]);
 
   useEffect(() => {
-<<<<<<< HEAD
-=======
     if (converted === 0) {
       return;
     }
->>>>>>> master
     const itemExists = items.some(
       (item) =>
         item.fromVal === fromVal &&

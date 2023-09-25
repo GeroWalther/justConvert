@@ -2,7 +2,7 @@
   "expo": {
     "name": "just convert",
     "slug": "justConvert",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,28 +11,21 @@
       "resizeMode": "contain",
       "backgroundColor": "#475569"
     },
-<<<<<<< HEAD
-    "assetBundlePatterns": ["**/*"],
-=======
     "assetBundlePatterns": [
       "**/*"
     ],
->>>>>>> master
+
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.waltherandstilling.justConvert",
-      "buildNumber": "5"
+      "buildNumber": "6"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#475569"
-<<<<<<< HEAD
-      }
-=======
       },
       "package": "com.waltherandstilling.justConvert"
->>>>>>> master
     },
     "web": {
       "favicon": "./assets/favicon.png"

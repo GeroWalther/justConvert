@@ -17,7 +17,6 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <SafeAreaView className='bg-slate-600 flex-1'>
         <RootNav />
-
         <StatusBar style='light' />
       </SafeAreaView>
     </QueryClientProvider>
