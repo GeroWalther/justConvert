@@ -80,6 +80,8 @@ PODS:
     - React-NativeModulesApple
     - React-RCTAppDelegate
     - ReactCommon/turbomodule/core
+  - ExpoWebBrowser (12.3.2):
+    - ExpoModulesCore
   - EXSplashScreen (0.20.5):
     - ExpoModulesCore
     - RCT-Folly (= 2021.07.22.00)
@@ -562,6 +564,7 @@ DEPENDENCIES:
   - expo-dev-menu-interface (from `../node_modules/expo-dev-menu-interface/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - ExpoWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
   - EXUpdates (from `../node_modules/expo-updates/ios`)
@@ -655,6 +658,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core"
+  ExpoWebBrowser:
+    :path: "../node_modules/expo-web-browser/ios"
   EXSplashScreen:
     :path: "../node_modules/expo-splash-screen/ios"
   EXStructuredHeaders:
@@ -769,6 +774,7 @@ SPEC CHECKSUMS:
   expo-dev-menu-interface: bda969497e73dadc2663c479e0fa726ca79a306e
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
   ExpoModulesCore: e5a168deba84f74c0e558befa31dbaea06c00af0
+  ExpoWebBrowser: 2c788f9c07718a780fe6d8bf2f6195c47609faaa
   EXSplashScreen: c0e7f2d4a640f3b875808ed0b88575538daf6d82
   EXStructuredHeaders: 324cc3130571d2696357fafd8be7fd9a0b5fdf6e
   EXUpdates: 84247b49ea4dde3c6ce5b33c8fc9ac5a2757b73f

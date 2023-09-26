@@ -11,6 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { ActionBtn } from '../components/ui/ProMemberModal.js';
 import Purchases from 'react-native-purchases';
 import useRevenueCat from '../hooks/useRevenueCat';
+import { openBrowserAsync } from 'expo-web-browser';
 
 function CloseBtn({ onClose }) {
   return (
@@ -106,7 +107,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
           )}
           {isOfferingLoading || isLoading ? null : (
             <Pressable onPress={restorePurchases}>
-              <Text className='text-orange-400 underline'>
+              <Text className='text-orange-400 underline mb-5'>
                 Restore Purchases
               </Text>
             </Pressable>
@@ -114,9 +115,19 @@ const SubsriptionModalScreen = ({ navigation }) => {
         </View>
 
         <Text className='text-sm text-slate-400 p-3 fixed'>
-          * By clicking 'Subscribe & Pay' you agree to the terms our of
-          conditions and subscribe to a monthly/yearly subscription
+          * By clicking 'Subscribe & Pay' you agree to the terms our of use and
+          subscribe to a monthly/yearly subscription.
         </Text>
+        <Pressable
+          onPress={() =>
+            openBrowserAsync(
+              'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'
+            )
+          }>
+          <Text className='text-blue-400 underline text-sm pb-5'>
+            Terms of Use
+          </Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
