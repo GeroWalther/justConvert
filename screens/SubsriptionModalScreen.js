@@ -114,20 +114,41 @@ const SubsriptionModalScreen = ({ navigation }) => {
           )}
         </View>
 
-        <Text className='text-sm text-slate-400 p-3 fixed'>
-          * By clicking 'Subscribe & Pay' you agree to the terms our of use and
-          subscribe to a monthly/yearly subscription.
+        <Text className='text-xs text-slate-400 p-3 fixed text-center'>
+          *By clicking 'Subscribe & Pay' you agree to the terms of use, privacy
+          policy and subscribe to a monthly/yearly subscription. Price of
+          subscription will be charged to your credit card through your Apple
+          account at confirmation of purchase. subscription automatically renews
+          unless auto-renew is turned off at least 24 hours before the current
+          period. account will be charged for renewal within 24-hours prior to
+          the end of the current period and identify the cost of the renewal.
+          You can cancel anytime with your iTunes account settings. Any unused
+          portion of a free trial will be forfeited if you purchase a
+          subscription. Manage your subscription in account Settings after
+          purchase.
         </Text>
-        <Pressable
-          onPress={() =>
-            openBrowserAsync(
-              'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'
-            )
-          }>
-          <Text className='text-blue-400 underline text-sm pb-5'>
-            Terms of Use
-          </Text>
-        </Pressable>
+        <View className='flex-row gap-5'>
+          <Pressable
+            onPress={() =>
+              openBrowserAsync(
+                'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'
+              )
+            }>
+            <Text className='text-slate-400 underline text-xs pb-5'>
+              Terms of Use
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() =>
+              openBrowserAsync(
+                'https://www.privacypolicies.com/live/bc37d64b-1024-4aec-9ede-2e5039536fcc'
+              )
+            }>
+            <Text className='text-slate-400 underline text-xs pb-5'>
+              Privacy Policy
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </ScrollView>
   );
