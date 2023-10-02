@@ -2,7 +2,7 @@
   "expo": {
     "name": "just convert",
     "slug": "justConvert",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,7 +16,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.waltherandstilling.justConvert",
-      "buildNumber": "7"
+      "buildNumber": "8"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,9 +33,7 @@
         "projectId": "dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "1.1.7",
     "updates": {
       "url": "https://u.expo.dev/dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
     }
