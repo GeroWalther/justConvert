@@ -22,14 +22,14 @@ function CloseBtn({ onClose }) {
     </Pressable>
   );
 }
-function Card({ title, price = '$2.99', onPress }) {
+function Card({ title, price = '$2.99', period = 'monthly', trial, onPress }) {
   return (
     <View className='bg-slate-500 px-7 py-5 mb-8 rounded-lg items-center'>
       <Text className='uppercase text-slate-200 text-lg'>{title}</Text>
       <Text className='text-base text-slate-200 p-3 text-center'>
-        <Text className='font-bold'>{price}</Text>
+        <Text className='font-bold'>{price}</Text> / {period} {trial}
       </Text>
-      <ActionBtn onPress={onPress}>Upgrade & Pay</ActionBtn>
+      <ActionBtn onPress={onPress}>Subscribe & Pay</ActionBtn>
     </View>
   );
 }
@@ -72,7 +72,11 @@ const SubsriptionModalScreen = ({ navigation }) => {
     setIsLoading(false);
   }
 
-  console.log(currentOffering?.availablePackages);
+  const getPkTypeString = (type) => {
+    if (type === 'MONTHLY') return 'monthly';
+    else if (type === 'ANNUAL') return 'yearly';
+  };
+  // console.log(currentOffering?.availablePackages);
   return (
     <ScrollView className='bg-slate-700'>
       <CloseBtn onClose={() => navigation.goBack()} />
@@ -80,7 +84,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
       <View className='items-center'>
         <View className='items-center justify-between px-3 py-4'>
           <Text className='text-4xl text-center text-slate-200 mb-10'>
-            Upgrade and get full access to all features
+            Subscribe and get full access to all features
           </Text>
           {isOfferingLoading || isLoading ? (
             <ActivityIndicator />
@@ -90,11 +94,17 @@ const SubsriptionModalScreen = ({ navigation }) => {
                 key={pk.identifier}
                 title={pk.product.title}
                 price={pk.product.priceString}
+                period={getPkTypeString(pk.packageType)}
+                trial={
+                  pk.product.introPrice &&
+                  `after ${
+                    pk.product.introPrice.periodNumberOfUnits
+                  } ${pk.product.introPrice.periodUnit.toLowerCase()} free trial ends`
+                }
                 onPress={() => payNsubcribe(pk)}
               />
             ))
           )}
-
           {isOfferingLoading || isLoading ? null : (
             <Pressable onPress={restorePurchases}>
               <Text className='text-orange-400 underline mb-5'>
@@ -105,11 +115,17 @@ const SubsriptionModalScreen = ({ navigation }) => {
         </View>
 
         <Text className='text-xs text-slate-400 p-3 fixed text-center'>
-          *By clicking 'Upgrade & Pay' you agree to the terms of use, privacy
-          policy and make a purchase. Price of the purchase will be charged to
-          your credit card through your Apple account at confirmation of
-          purchase. This is a one time payment. Upgrade to Pro once and you will
-          for ever have access to pro units.
+          *By clicking 'Subscribe & Pay' you agree to the terms of use, privacy
+          policy and subscribe to a monthly/yearly subscription. Price of
+          subscription will be charged to your credit card through your Apple
+          account at confirmation of purchase. subscription automatically renews
+          unless auto-renew is turned off at least 24 hours before the current
+          period. account will be charged for renewal within 24-hours prior to
+          the end of the current period and identify the cost of the renewal.
+          You can cancel anytime with your iTunes account settings. Any unused
+          portion of a free trial will be forfeited if you purchase a
+          subscription. Manage your subscription in account Settings after
+          purchase.
         </Text>
         <View className='flex-row gap-5'>
           <Pressable

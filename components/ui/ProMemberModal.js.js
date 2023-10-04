@@ -30,8 +30,8 @@ const ProMemberModal = ({ onClose, isVisible }) => {
         <ScrollView>
           <View className='p-3'>
             <Text className='font-bold text-slate-800 text-lg mb-4'>
-              Subscribe and upgrade to have access to all available units and
-              currency pairs!
+              Upgrade to Pro to get access to all available units and currency
+              pairs!
             </Text>
             <Text className='font-semibold text-slate-800 mb-2 text-base'>
               All included units:
