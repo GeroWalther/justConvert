@@ -72,7 +72,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
     setIsLoading(false);
   }
 
-  console.log(currentOffering?.availablePackages);
+  // console.log(currentOffering?.availablePackages);
   return (
     <ScrollView className='bg-slate-700'>
       <CloseBtn onClose={() => navigation.goBack()} />
@@ -85,7 +85,7 @@ const SubsriptionModalScreen = ({ navigation }) => {
           {isOfferingLoading || isLoading ? (
             <ActivityIndicator />
           ) : (
-            currentOffering.availablePackages.map((pk) => (
+            currentOffering?.availablePackages?.map((pk) => (
               <Card
                 key={pk.identifier}
                 title={pk.product.title}
