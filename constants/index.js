@@ -74,7 +74,7 @@ export const volumesPro = [
   { label: 'Cubic Meter (m³)', value: 'm3' },
   { label: 'Fluid Ounce (fl-oz)', value: 'fl-oz' },
   { label: 'Gallon (US)', value: 'gal' },
-  { label: 'Pint (US)', value: 'pt' },
+  { label: 'Pint (US)', value: 'pnt' },
   { label: 'Cup (US)', value: 'cup' },
 ];
 export const volumes = [
