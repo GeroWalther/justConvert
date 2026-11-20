@@ -2,40 +2,45 @@
   "expo": {
     "name": "just convert",
     "slug": "justConvert",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#475569"
-    },
-    "assetBundlePatterns": ["**/*"],
-
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.waltherandstilling.justConvert",
-      "buildNumber": "9"
+      "buildNumber": "10",
+      "appleTeamId": "W67AW8RFW4",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash.png",
-        "backgroundColor": "#475569"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f172a"
       },
       "package": "com.waltherandstilling.justConvert"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#0f172a"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser"
+    ],
     "extra": {
       "eas": {
         "projectId": "dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
       }
-    },
-    "runtimeVersion": "1.2.0",
-    "updates": {
-      "url": "https://u.expo.dev/dd5d5da2-90e7-4b16-88ea-8d28e0c14317"
     }
   }
 }
